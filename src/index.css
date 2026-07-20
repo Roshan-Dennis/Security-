@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050b16;
+  --bg-soft: #081326;
+  --panel: rgba(255, 255, 255, 0.04);
+  --panel-border: rgba(120, 200, 255, 0.16);
+  --text: #e6f1ff;
+  --text-dim: #93a7c4;
+  --accent: #4fdcff;
+  --grid: rgba(79, 220, 255, 0.06);
+}
+
+html.light {
+  --bg: #f4f7fb;
+  --bg-soft: #ffffff;
+  --panel: rgba(255, 255, 255, 0.78);
+  --panel-border: rgba(9, 58, 88, 0.14);
+  --text: #0b2033;
+  --text-dim: #4a627d;
+  --accent: #0284a8;
+  --grid: rgba(9, 58, 88, 0.06);
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Ambient command-center backdrop */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(1100px 620px at 78% -8%, rgba(79, 220, 255, 0.16), transparent 62%),
+    radial-gradient(900px 520px at 8% 8%, rgba(167, 139, 250, 0.13), transparent 60%),
+    radial-gradient(800px 700px at 50% 108%, rgba(61, 220, 151, 0.10), transparent 60%);
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 50% 30%, black, transparent 78%);
+  pointer-events: none;
+}
+
+::selection { background: rgba(79, 220, 255, 0.28); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(79, 220, 255, 0.45), rgba(167, 139, 250, 0.35));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+@layer components {
+  .glass {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+  .card {
+    @apply glass rounded-2xl shadow-panel;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-glow;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium tracking-wide;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-300/70;
+  }
+  .btn-primary {
+    @apply btn text-[#04121c];
+    background: linear-gradient(135deg, #7ee9ff 0%, #4fdcff 45%, #3ddc97 100%);
+    box-shadow: 0 10px 34px -12px rgba(79, 220, 255, 0.85);
+  }
+  .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/[0.03] text-[color:var(--text)] hover:bg-white/[0.08];
+  }
+  .section-title {
+    @apply font-display text-2xl font-bold tracking-tight sm:text-3xl;
+  }
+  .muted { color: var(--text-dim); }
+  .prose-cyber p { @apply leading-relaxed; color: var(--text-dim); }
+  .kbd {
+    @apply rounded border border-white/20 bg-white/10 px-1.5 py-0.5 font-mono text-[10px];
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #ffffff 0%, #9fe9ff 40%, #3ddc97 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+html.light .text-gradient {
+  background: linear-gradient(100deg, #0b2033 0%, #0d7ea3 45%, #0f9d6b 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.flow-dash {
+  stroke-dasharray: 6 8;
+  animation: flowdash 1.2s linear infinite;
+}
+@keyframes flowdash { to { stroke-dashoffset: -28; } }
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
