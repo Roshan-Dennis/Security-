@@ -1,0 +1,57 @@
+{
+  "name": "cybersec-academy",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CyberSec Academy - an interactive CompTIA Security+ (SY0-701) learning platform.",
+  "author": "Roshan Dennis",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "icons": "node scripts/gen-icons.mjs",
+    "test": "npm run typecheck && npm run test:render && npm run test:dom",
+    "test:render": "esbuild scripts/smoke.tsx --bundle --platform=node --format=cjs --outfile=.smoke.cjs --jsx=automatic --loader:.css=empty --log-level=error && node .smoke.cjs && rm -f .smoke.cjs",
+    "test:dom": "node scripts/dom-smoke.mjs"
+  },
+  "dependencies": {
+    "framer-motion": "^11.11.17",
+    "lucide-react": "^0.454.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.169.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "jsdom": "^30.0.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  },
+  "keywords": [
+    "comptia",
+    "security-plus",
+    "sy0-701",
+    "cybersecurity",
+    "education",
+    "react",
+    "typescript",
+    "threejs",
+    "tailwindcss",
+    "soc",
+    "learning-platform"
+  ],
+  "homepage": "https://roshandennis.github.io/cybersec-academy/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roshandennis/cybersec-academy.git"
+  }
+}
