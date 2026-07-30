@@ -49,9 +49,12 @@
     "soc",
     "learning-platform"
   ],
-  "homepage": "https://roshandennis.github.io/cybersec-academy/",
+  "homepage": "https://roshan-dennis.github.io/Security-/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roshandennis/cybersec-academy.git"
+    "url": "https://github.com/Roshan-Dennis/Security-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Roshan-Dennis/Security-/issues"
   }
 }

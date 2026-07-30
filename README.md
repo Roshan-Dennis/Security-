@@ -15,6 +15,8 @@
 [![Three.js](https://img.shields.io/badge/Three.js-r169-3ddc97?style=flat-square&logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-ffb547?style=flat-square)](./LICENSE)
 
+**[Live site →](https://roshan-dennis.github.io/Security-/)**
+
 </div>
 
 ---
@@ -103,7 +105,7 @@ It is a fully static front end — no backend, no accounts, no tracking. Progres
 ## Project structure
 
 ```
-cybersec-academy/
+Security-/
 ├── .github/workflows/       # CI + GitHub Pages deployment
 ├── public/                  # static assets (.nojekyll for Pages)
 ├── scripts/
@@ -140,8 +142,8 @@ cybersec-academy/
 **Requirements:** Node.js 18+ and npm.
 
 ```bash
-git clone https://github.com/<your-username>/cybersec-academy.git
-cd cybersec-academy
+git clone https://github.com/Roshan-Dennis/Security-.git
+cd Security-
 npm install
 npm run dev          # http://localhost:5173
 ```
@@ -167,7 +169,7 @@ npm run dev          # http://localhost:5173
 2. Go to **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**.
 3. Push to `main`. The workflow in `.github/workflows/deploy.yml` type checks, tests, builds with the correct
    `BASE_PATH`, and publishes.
-4. The site appears at `https://<your-username>.github.io/<repo-name>/`.
+4. The site appears at **<https://roshan-dennis.github.io/Security-/>**.
 
 The app uses `HashRouter`, so every deep link works on Pages without custom rewrite rules.
 
