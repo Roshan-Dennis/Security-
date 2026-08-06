@@ -8,7 +8,7 @@ import { EXAM_D5 } from './d5'
 
 export const EXAM_BANK: ExamQuestion[] = [...EXAM_D1, ...EXAM_D2, ...EXAM_D3, ...EXAM_D4, ...EXAM_D5]
 
-export const EXAM_BANK_SIZE = EXAM_BANK.length
+export { EXAM_BANK_SIZE } from './size'
 
 /** Official SY0-701 domain weightings, used to build representative papers. */
 export const DOMAIN_WEIGHTS: Record<number, number> = { 1: 0.12, 2: 0.22, 3: 0.18, 4: 0.28, 5: 0.2 }

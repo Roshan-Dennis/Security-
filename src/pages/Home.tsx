@@ -132,7 +132,7 @@ export default function Home() {
 
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-4 pb-6 sm:px-6 lg:grid-cols-4 lg:px-8">
           <Stat value={String(TOTAL_TOPICS)} label="Interactive topics" />
-          <Stat value={String(TOTAL_QUESTIONS)} label="Exam-style questions" />
+          <Stat value={String(TOTAL_QUESTIONS)} label="Practice questions" />
           <Stat value={`${TOTAL_TOOLS}+`} label="Security tools covered" />
           <Stat value={`${TOTAL_LINKS}+`} label="Primary source links" />
         </div>

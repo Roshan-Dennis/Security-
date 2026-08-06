@@ -197,7 +197,7 @@ function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-[12px] muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            {TOTAL_TOPICS} interactive topics · {TOTAL_QUESTIONS} exam-style questions · built with React, TypeScript,
+            {TOTAL_TOPICS} interactive topics · {TOTAL_QUESTIONS} practice questions · built with React, TypeScript,
             Three.js and Framer Motion.
           </p>
           <p>

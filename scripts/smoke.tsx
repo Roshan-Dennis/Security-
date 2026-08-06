@@ -15,7 +15,7 @@ import ProgressPage from '../src/pages/Progress'
 import Resources from '../src/pages/Resources'
 import About from '../src/pages/About'
 import NotFound from '../src/pages/NotFound'
-import { TOPICS, DOMAINS, GLOSSARY, CHEATSHEETS, LABS, EXAM_BANK, EXAM_MODES, buildExam, isCorrect, domainModes } from '../src/data'
+import { TOPICS, DOMAINS, GLOSSARY, CHEATSHEETS, LABS, EXAM_BANK, EXAM_BANK_SIZE, EXAM_MODES, buildExam, isCorrect, domainModes } from '../src/data'
 import { shuffleOptions } from '../src/lib/shuffle'
 
 function render(path: string) {
@@ -129,6 +129,11 @@ LABS.forEach((l) => check('lab ' + l.id, ['safe', 'suspicious', 'malicious'].inc
 
 console.log(`Exam bank (${EXAM_BANK.length})`)
 check('bank size is 300', EXAM_BANK.length === 300, String(EXAM_BANK.length))
+check(
+  'EXAM_BANK_SIZE constant matches the real bank length',
+  EXAM_BANK_SIZE === EXAM_BANK.length,
+  `constant ${EXAM_BANK_SIZE} vs actual ${EXAM_BANK.length}`,
+)
 const examIds = new Set<string>()
 const topicSlugs = new Set(TOPICS.map((t) => t.slug))
 const byDomainCount: Record<number, number> = {}

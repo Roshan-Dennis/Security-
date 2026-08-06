@@ -51,7 +51,7 @@ export default function About() {
 
       <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat value={String(TOTAL_TOPICS)} label="Interactive topics" />
-        <Stat value={String(TOTAL_QUESTIONS)} label="Exam-style questions" />
+        <Stat value={String(TOTAL_QUESTIONS)} label="Practice questions" />
         <Stat value={`${TOTAL_TOOLS}+`} label="Tools explained" />
         <Stat value={`${TOTAL_LINKS}+`} label="Primary sources" />
       </div>
