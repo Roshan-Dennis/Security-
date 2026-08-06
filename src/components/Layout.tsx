@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, Search, Sun, Moon, Github, Linkedin, Command } from 'lucide-react'
+import { Menu, X, Search, Sun, Moon, Command } from 'lucide-react'
 import { BrandMark, Logo } from './Brand'
 import SearchPalette from './SearchPalette'
 import { DOMAINS, TOTAL_TOPICS, TOTAL_QUESTIONS } from '../data'
@@ -164,24 +164,6 @@ function Footer() {
               </span>
             </p>
             <div className="mt-4 flex items-center gap-2">
-              <a
-                href="https://github.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="chip hover:bg-white/10"
-                aria-label="GitHub"
-              >
-                <Github className="h-3.5 w-3.5" /> GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="chip hover:bg-white/10"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-3.5 w-3.5" /> LinkedIn
-              </a>
             </div>
           </div>
 

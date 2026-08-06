@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Github, Linkedin, ShieldCheck, Code2, BookOpen, Cpu } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Code2, BookOpen, Cpu } from 'lucide-react'
 import Scene3D from '../components/Scene3D'
 import { Section, Stat } from '../components/UI'
 import { Logo } from '../components/Brand'
@@ -45,12 +45,6 @@ export default function About() {
             <Link to="/domains" className="btn-primary">
               Explore the curriculum <ArrowRight className="h-4 w-4" />
             </Link>
-            <a href="https://github.com/" target="_blank" rel="noreferrer noopener" className="btn-ghost">
-              <Github className="h-4 w-4" /> Source on GitHub
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" className="btn-ghost">
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
           </div>
         </div>
       </section>
