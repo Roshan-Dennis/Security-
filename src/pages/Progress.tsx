@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Bookmark, CircleCheck, RotateCcw, Trophy, ArrowRight } from 'lucide-react'
+import { Bookmark, CircleCheck, RotateCcw, Trophy, ArrowRight, Target } from 'lucide-react'
 import { Section, ProgressRing, Stat } from '../components/UI'
 import { getIcon } from '../components/iconMap'
 import { DOMAINS, TOPICS, TOTAL_TOPICS, topicBySlug, topicsByDomain } from '../data'
 import { useStore } from '../lib/store'
 
 export default function ProgressPage() {
-  const { completed, bookmarks, quizScores, reset, toggleBookmark } = useStore()
+  const { completed, bookmarks, quizScores, examAttempts, reset, toggleBookmark } = useStore()
   const pct = Math.round((completed.length / TOTAL_TOPICS) * 100)
   const quizEntries = Object.entries(quizScores)
   const quizTotal = quizEntries.reduce((n, [, v]) => n + v.total, 0)
@@ -52,7 +52,7 @@ export default function ProgressPage() {
         <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
           <Stat value={String(completed.length)} label="Topics completed" />
           <Stat value={String(bookmarks.length)} label="Bookmarked" />
-          <Stat value={String(quizEntries.length)} label="Quizzes attempted" />
+          <Stat value={String(examAttempts.length)} label="Exams sat" />
           <Stat value={`${quizPct}%`} label="Best-score average" />
         </div>
 
@@ -108,7 +108,47 @@ export default function ProgressPage() {
         )}
 
         <h3 className="mt-12 flex items-center gap-2 font-display text-lg font-semibold">
-          <Trophy className="h-4.5 w-4.5 text-neon-amber" /> Quiz results
+          <Target className="h-4.5 w-4.5 text-cyber-300" /> Practice exam history
+        </h3>
+        {examAttempts.length === 0 ? (
+          <p className="card mt-4 p-8 text-center text-sm muted">
+            No exam attempts yet.{' '}
+            <Link to="/exam" className="font-semibold text-cyber-200 hover:underline">
+              Sit a timed paper
+            </Link>{' '}
+            to find out where you actually stand.
+          </p>
+        ) : (
+          <div className="card mt-4 divide-y divide-white/6">
+            {examAttempts.map((a) => {
+              const p = Math.round((a.score / a.total) * 100)
+              const weakest = Object.entries(a.byDomain)
+                .map(([d, r]) => ({ d: Number(d), pct: r.total ? r.correct / r.total : 1 }))
+                .sort((x, y) => x.pct - y.pct)[0]
+              return (
+                <div key={a.id} className="flex flex-wrap items-center gap-x-4 gap-y-1 px-5 py-3.5">
+                  <CircleCheck
+                    className={`h-4 w-4 shrink-0 ${p >= 80 ? 'text-neon-green' : p >= 65 ? 'text-neon-amber' : 'text-neon-red'}`}
+                  />
+                  <span className="min-w-0 flex-1 truncate text-[13.5px] font-medium">{a.mode}</span>
+                  <span className="font-mono text-[12px] muted">
+                    {a.score}/{a.total} · {p}%
+                  </span>
+                  <span className="font-mono text-[11px] muted">
+                    {Math.floor(a.seconds / 60)}m {a.seconds % 60}s
+                  </span>
+                  {weakest && (
+                    <span className="font-mono text-[11px] muted">weakest: D{weakest.d}</span>
+                  )}
+                  <span className="font-mono text-[11px] muted">{new Date(a.at).toLocaleDateString()}</span>
+                </div>
+              )
+            })}
+          </div>
+        )}
+
+        <h3 className="mt-12 flex items-center gap-2 font-display text-lg font-semibold">
+          <Trophy className="h-4.5 w-4.5 text-neon-amber" /> Topic quiz results
         </h3>
         {quizEntries.length === 0 ? (
           <p className="card mt-4 p-8 text-center text-sm muted">

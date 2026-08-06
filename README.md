@@ -35,7 +35,8 @@ It is a fully static front end — no backend, no accounts, no tracking. Progres
 | | |
 | --- | --- |
 | **48** interactive topics | across all five SY0-701 domains |
-| **140+** exam-style questions | every answer explained |
+| **300** exam-simulator questions | plus 140+ per-topic questions, every answer explained |
+| **Timed mock papers** | 90, 45 and 20 question papers sampled to official domain weightings |
 | **48** animated diagrams | hover to isolate, step through stage by stage |
 | **8** Three.js scenes | globe, lock, firewall, malware, cloud, network, radar, shield |
 | **8** lab scenarios | phishing triage, log analysis, alert triage |
@@ -53,10 +54,13 @@ It is a fully static front end — no backend, no accounts, no tracking. Progres
   packets along bezier connectors, supports hover isolation and stage-by-stage stepping.
 - **Real-time 3D scenes** built on Three.js, with capped pixel ratio, `IntersectionObserver` pausing when off-screen,
   and a static single-frame fallback for `prefers-reduced-motion`.
+- **Timed exam simulator** — a 300-question bank, full 90-question mock papers sampled to the official SY0-701 domain
+  weightings, flag-for-review, a question navigator, and a results screen with per-domain scoring plus a full review
+  linking every missed question back to the topic that explains it. Includes single-domain drills.
 - **Cybersecurity Lab Simulator** — realistic artefacts (headers, authentication logs, EDR alerts) to triage as safe,
   suspicious or malicious, each with a full analyst breakdown and red-flag list.
-- **Progress tracking** — completed topics, per-domain coverage rings, bookmarks and best quiz scores, persisted to
-  `localStorage`.
+- **Progress tracking** — completed topics, per-domain coverage rings, bookmarks, best quiz scores and full exam
+  attempt history, persisted to `localStorage`.
 
 ### Platform
 - Command-palette search (`⌘K` / `Ctrl+K` / `/`) across topics, domains, glossary and cheat sheets.
@@ -123,12 +127,13 @@ Security-/
 │   │   ├── UI.tsx           # Section, Reveal, Stat, ProgressRing
 │   │   └── iconMap.ts       # generated
 │   ├── data/
-│   │   ├── topics/domain1..5.ts
+│   │   ├── topics/domain1..5.ts     # 48 interactive topics
+│   │   ├── exam/d1..d5.ts           # 300-question exam bank + paper builder
 │   │   ├── domains.ts  glossary.ts  cheatsheets.ts  labs.ts  index.ts
 │   ├── lib/
 │   │   ├── store.tsx        # theme, progress, bookmarks, quiz scores
 │   │   └── tone.ts          # semantic colour tokens
-│   ├── pages/               # Home, Domains, TopicPage, Labs, Glossary,
+│   ├── pages/               # Home, Domains, TopicPage, Exam, Labs, Glossary,
 │   │                        # CheatSheets, Progress, Resources, About, NotFound
 │   ├── types.ts             # the content model
 │   ├── App.tsx  main.tsx  index.css
@@ -205,7 +210,8 @@ Every topic is a typed object. To add one:
 1. Append a `Topic` to the relevant file in `src/data/topics/`.
 2. Give it a unique `slug`, a `domain` (1–5), a `diagram` whose edge `from`/`to` match node `id`s, at least two tools,
    three research links and two quiz questions.
-3. Run `npm run icons` if you referenced a new lucide icon name.
+3. Run `npm run icons` if you referenced a new lucide icon name. Exam questions live in `src/data/exam/` and are
+   validated the same way — unique ids, four options, in-range answer indices and a topic slug that resolves.
 4. Run `npm test` — the suite validates slugs, diagram edge integrity, quiz answer indices, link protocols and that the
    page renders.
 

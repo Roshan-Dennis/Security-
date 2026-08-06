@@ -18,7 +18,7 @@ const FEATURES = [
   { icon: Cpu, title: 'Real-time 3D scenes', body: 'Three.js visuals for globes, locks, firewalls, malware spread, radar sweeps and cloud infrastructure, tuned for performance.' },
   { icon: Target, title: 'Attack walkthroughs', body: 'Each concept is paired with how it actually fails in the field, step by step, followed by the mitigations that break the chain.' },
   { icon: FlaskConical, title: 'Hands-on lab simulator', body: 'Triage phishing emails, authentication log bursts and EDR alerts. Choose safe, suspicious or malicious and see the analysis.' },
-  { icon: BookOpen, title: 'Exam-style practice', body: 'Scenario-based multiple choice with a full explanation after every answer — including why the distractors are wrong.' },
+  { icon: BookOpen, title: 'Timed exam simulator', body: 'A 300-question bank plus full 90-question mock papers sampled to the official domain weightings, with a per-domain score breakdown.' },
   { icon: Radar, title: 'Curated primary sources', body: 'Deep-dive links straight to NIST, MITRE ATT&CK, OWASP, CISA, IETF RFCs and major cloud provider documentation.' },
 ]
 
@@ -82,6 +82,9 @@ export default function Home() {
               </Link>
               <Link to="/domains" className="btn-ghost">
                 <Layers className="h-4 w-4" /> Explore Security+ Domains
+              </Link>
+              <Link to="/exam" className="btn-ghost">
+                <Target className="h-4 w-4" /> Take a practice exam
               </Link>
             </motion.div>
 
@@ -245,7 +248,8 @@ export default function Home() {
 
       {/* --------------------------------------------------------- Utility row */}
       <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <UtilityCard to="/exam" icon={Target} title="Practice Exam" body="Timed mock papers and single-domain drills drawn from a 300-question bank." />
           <UtilityCard to="/glossary" icon={Search} title="Glossary" body="Every acronym Security+ throws at you, defined in one line and filterable by domain." />
           <UtilityCard to="/cheat-sheets" icon={Sparkles} title="Cheat Sheets" body="Ports, crypto, risk formulas, control matrix, attack cues and the IR runbook." />
           <UtilityCard to="/progress" icon={Bookmark} title="Progress & Bookmarks" body="Track completed topics, quiz bests and saved pages — stored locally in your browser." />

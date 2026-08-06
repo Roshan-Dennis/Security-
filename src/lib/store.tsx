@@ -1,3 +1,4 @@
+import type { ExamAttempt } from '../types'
 import {
   createContext,
   useCallback,
@@ -17,6 +18,8 @@ interface QuizResult {
 }
 
 interface StoreShape {
+  examAttempts: ExamAttempt[]
+  recordExam: (attempt: ExamAttempt) => void
   theme: Theme
   toggleTheme: () => void
   completed: string[]
@@ -37,9 +40,10 @@ interface Persisted {
   completed: string[]
   bookmarks: string[]
   quizScores: Record<string, QuizResult>
+  examAttempts: ExamAttempt[]
 }
 
-const DEFAULTS: Persisted = { theme: 'dark', completed: [], bookmarks: [], quizScores: {} }
+const DEFAULTS: Persisted = { theme: 'dark', completed: [], bookmarks: [], quizScores: {}, examAttempts: [] }
 
 function load(): Persisted {
   if (typeof window === 'undefined') return DEFAULTS
@@ -108,6 +112,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     [],
   )
 
+  const recordExam = useCallback(
+    (attempt: ExamAttempt) =>
+      setState((s) => ({ ...s, examAttempts: [attempt, ...s.examAttempts].slice(0, 25) })),
+    [],
+  )
+
   const reset = useCallback(() => setState((s) => ({ ...DEFAULTS, theme: s.theme })), [])
 
   const value = useMemo<StoreShape>(
@@ -122,9 +132,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       isBookmarked: (slug) => state.bookmarks.includes(slug),
       quizScores: state.quizScores,
       recordQuiz,
+      examAttempts: state.examAttempts,
+      recordExam,
       reset,
     }),
-    [state, toggleTheme, toggleComplete, toggleBookmark, recordQuiz, reset],
+    [state, toggleTheme, toggleComplete, toggleBookmark, recordQuiz, recordExam, reset],
   )
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>

@@ -8,6 +8,7 @@ const DomainsIndex = lazy(() => import('./pages/Domains').then((m) => ({ default
 const DomainPage = lazy(() => import('./pages/Domains').then((m) => ({ default: m.DomainPage })))
 const TopicPage = lazy(() => import('./pages/TopicPage'))
 const Labs = lazy(() => import('./pages/Labs'))
+const Exam = lazy(() => import('./pages/Exam'))
 const Glossary = lazy(() => import('./pages/Glossary'))
 const CheatSheets = lazy(() => import('./pages/CheatSheets'))
 const ProgressPage = lazy(() => import('./pages/Progress'))
@@ -52,6 +53,7 @@ export default function App() {
               <Route path="domain/:slug" element={<DomainPage />} />
               <Route path="topic/:slug" element={<TopicPage />} />
               <Route path="labs" element={<Labs />} />
+              <Route path="exam" element={<Exam />} />
               <Route path="glossary" element={<Glossary />} />
               <Route path="cheat-sheets" element={<CheatSheets />} />
               <Route path="progress" element={<ProgressPage />} />

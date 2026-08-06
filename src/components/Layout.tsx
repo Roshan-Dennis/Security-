@@ -9,6 +9,7 @@ import { useStore } from '../lib/store'
 
 const NAV = [
   { to: '/domains', label: 'Domains' },
+  { to: '/exam', label: 'Practice Exam' },
   { to: '/labs', label: 'Labs' },
   { to: '/glossary', label: 'Glossary' },
   { to: '/cheat-sheets', label: 'Cheat Sheets' },

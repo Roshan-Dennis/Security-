@@ -39,7 +39,7 @@ window.eval(code)
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 const routes = ['#/', '#/domains', '#/domain/security-operations', '#/topic/firewalls', '#/topic/cia-triad',
-  '#/labs', '#/glossary', '#/cheat-sheets', '#/progress', '#/resources', '#/about', '#/nope']
+  '#/labs', '#/exam', '#/glossary', '#/cheat-sheets', '#/progress', '#/resources', '#/about', '#/nope']
 
 await wait(400)
 const results = []

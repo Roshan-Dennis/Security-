@@ -129,3 +129,27 @@ export interface LabScenario {
   explain: string;
   redFlags: string[];
 }
+
+export interface ExamQuestion {
+  id: string
+  domain: number
+  objective: string
+  difficulty: 'Easy' | 'Medium' | 'Hard'
+  q: string
+  options: string[]
+  /** a single index, or an array of indices for select-all-that-apply items */
+  answer: number | number[]
+  explain: string
+  /** slug of the topic to revise if this question is missed */
+  topic?: string
+}
+
+export interface ExamAttempt {
+  id: string
+  mode: string
+  score: number
+  total: number
+  seconds: number
+  at: number
+  byDomain: Record<number, { correct: number; total: number }>
+}

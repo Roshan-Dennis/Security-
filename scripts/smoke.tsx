@@ -8,13 +8,14 @@ import Home from '../src/pages/Home'
 import { DomainsIndex, DomainPage } from '../src/pages/Domains'
 import TopicPage from '../src/pages/TopicPage'
 import Labs from '../src/pages/Labs'
+import Exam from '../src/pages/Exam'
 import Glossary from '../src/pages/Glossary'
 import CheatSheets from '../src/pages/CheatSheets'
 import ProgressPage from '../src/pages/Progress'
 import Resources from '../src/pages/Resources'
 import About from '../src/pages/About'
 import NotFound from '../src/pages/NotFound'
-import { TOPICS, DOMAINS, GLOSSARY, CHEATSHEETS, LABS } from '../src/data'
+import { TOPICS, DOMAINS, GLOSSARY, CHEATSHEETS, LABS, EXAM_BANK, EXAM_MODES, buildExam, isCorrect, domainModes } from '../src/data'
 
 function render(path: string) {
   return renderToString(
@@ -27,6 +28,7 @@ function render(path: string) {
             <Route path="domain/:slug" element={<DomainPage />} />
             <Route path="topic/:slug" element={<TopicPage />} />
             <Route path="labs" element={<Labs />} />
+            <Route path="exam" element={<Exam />} />
             <Route path="glossary" element={<Glossary />} />
             <Route path="cheat-sheets" element={<CheatSheets />} />
             <Route path="progress" element={<ProgressPage />} />
@@ -59,6 +61,7 @@ const routes: [string, string[]][] = [
   ['/', ['Master Cybersecurity', 'Roshan Dennis', 'Start Learning', 'Explore Security+ Domains']],
   ['/domains', ['Security+ SY0-701 domains']],
   ['/labs', ['Cybersecurity Lab Simulator']],
+  ['/exam', ['Timed practice exam', 'Full mock exam', 'Single-domain drills']],
   ['/glossary', ['Glossary']],
   ['/cheat-sheets', ['Cheat sheets', 'Ports & Protocols']],
   ['/progress', ['Progress & bookmarks']],
@@ -122,6 +125,48 @@ for (const t of TOPICS) {
   t.links.forEach((l) => check(`${t.slug} link https`, l.url.startsWith('https://') || l.url.startsWith('http://')))
 }
 LABS.forEach((l) => check('lab ' + l.id, ['safe', 'suspicious', 'malicious'].includes(l.correct)))
+
+console.log(`Exam bank (${EXAM_BANK.length})`)
+check('bank size is 300', EXAM_BANK.length === 300, String(EXAM_BANK.length))
+const examIds = new Set<string>()
+const topicSlugs = new Set(TOPICS.map((t) => t.slug))
+const byDomainCount: Record<number, number> = {}
+for (const q of EXAM_BANK) {
+  check('unique exam id ' + q.id, !examIds.has(q.id))
+  examIds.add(q.id)
+  byDomainCount[q.domain] = (byDomainCount[q.domain] ?? 0) + 1
+  check(q.id + ' domain valid', q.domain >= 1 && q.domain <= 5)
+  check(q.id + ' has four options', q.options.length === 4)
+  check(q.id + ' has explanation', q.explain.length > 40)
+  const ans = Array.isArray(q.answer) ? q.answer : [q.answer]
+  check(q.id + ' answer count', ans.length >= 1 && ans.length < q.options.length)
+  ans.forEach((a) => check(q.id + ' answer index in range', a >= 0 && a < q.options.length))
+  check(q.id + ' answers unique', new Set(ans).size === ans.length)
+  if (q.topic) check(q.id + ' topic slug exists: ' + q.topic, topicSlugs.has(q.topic))
+}
+check('domain 1 count', byDomainCount[1] === 36, String(byDomainCount[1]))
+check('domain 2 count', byDomainCount[2] === 66, String(byDomainCount[2]))
+check('domain 3 count', byDomainCount[3] === 54, String(byDomainCount[3]))
+check('domain 4 count', byDomainCount[4] === 84, String(byDomainCount[4]))
+check('domain 5 count', byDomainCount[5] === 60, String(byDomainCount[5]))
+
+for (const mode of [...EXAM_MODES, ...domainModes()]) {
+  const paper = buildExam(mode)
+  check('paper size for ' + mode.key, paper.length === mode.count, `${paper.length} vs ${mode.count}`)
+  check('paper unique for ' + mode.key, new Set(paper.map((q) => q.id)).size === paper.length)
+  if (!mode.domain) {
+    ;[1, 2, 3, 4, 5].forEach((d) =>
+      check(`paper ${mode.key} covers domain ${d}`, paper.some((q) => q.domain === d)),
+    )
+  }
+}
+// grading logic
+const sample = EXAM_BANK.find((q) => Array.isArray(q.answer))!
+check('multi-select grades correctly', isCorrect(sample, [...(sample.answer as number[])]))
+check('multi-select rejects partial', !isCorrect(sample, [(sample.answer as number[])[0]]))
+const single = EXAM_BANK.find((q) => !Array.isArray(q.answer))!
+check('single grades correctly', isCorrect(single, [single.answer as number]))
+check('single rejects wrong', !isCorrect(single, [((single.answer as number) + 1) % single.options.length]))
 check('glossary size', GLOSSARY.length >= 50)
 check('cheatsheets', CHEATSHEETS.length >= 5)
 
@@ -130,6 +175,6 @@ function escapeHtml(s: string) {
 }
 
 console.log(
-  `\n${failures === 0 ? 'PASS' : 'FAIL'} — ${TOPICS.length} topics, ${DOMAINS.length} domains, ${LABS.length} labs, ${GLOSSARY.length} glossary terms, ${failures} failures\n`,
+  `\n${failures === 0 ? 'PASS' : 'FAIL'} — ${TOPICS.length} topics, ${DOMAINS.length} domains, ${EXAM_BANK.length} exam questions, ${LABS.length} labs, ${GLOSSARY.length} glossary terms, ${failures} failures\n`,
 )
 process.exit(failures === 0 ? 0 : 1)
