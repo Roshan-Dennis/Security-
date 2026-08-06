@@ -546,7 +546,7 @@ export const DOMAIN3: Topic[] = [
         'Traffic flows upward through a controlled demilitarised zone. Direct enterprise-to-controller access is the failure mode that causes incidents.',
       columns: [
         [{ id: 'l45', label: 'Level 4/5 — Enterprise IT', sub: 'ERP, email, internet', tone: 'neutral', icon: 'Building2' }],
-        [{ id: 'dmz', label: 'IT/OT DMZ', sub: 'data diode, jump host, historian replica', tone: 'primary', icon: 'BrickWall' }],
+        [{ id: 'dmz', label: 'IT/OT DMZ', sub: 'diode, jump host, historian', tone: 'primary', icon: 'BrickWall' }],
         [{ id: 'l3', label: 'Level 3 — Site Operations', sub: 'historian, MES', tone: 'violet', icon: 'Database' }],
         [{ id: 'l2', label: 'Level 2 — Supervisory', sub: 'SCADA, HMI', tone: 'warn', icon: 'MonitorCog' }],
         [{ id: 'l1', label: 'Level 1 — Control', sub: 'PLC, RTU, DCS', tone: 'danger', icon: 'CircuitBoard' }],

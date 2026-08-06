@@ -164,7 +164,7 @@ export const DOMAIN4: Topic[] = [
           { id: 'cloud', label: 'Cloud', sub: 'API audit trails', tone: 'neutral', icon: 'Cloud' },
         ],
         [{ id: 'collect', label: 'Collection', sub: 'agents, syslog, API', tone: 'primary', icon: 'Download' }],
-        [{ id: 'norm', label: 'Normalise & Enrich', sub: 'common schema, asset and threat context', tone: 'violet', icon: 'Shuffle' }],
+        [{ id: 'norm', label: 'Normalise & Enrich', sub: 'common schema, asset context', tone: 'violet', icon: 'Shuffle' }],
         [{ id: 'corr', label: 'Correlation Rules', sub: 'multi-source detection logic', tone: 'warn', icon: 'GitMerge' }],
         [
           { id: 'alert', label: 'Alert', sub: 'triaged by analysts', tone: 'danger', icon: 'Bell' },
@@ -1175,10 +1175,10 @@ export const DOMAIN4: Topic[] = [
         'The human decision point remains, but everything around it is automated. Analyst time goes to judgement, not clicking.',
       columns: [
         [{ id: 'report', label: 'User Reports Email', sub: 'report button in client', tone: 'neutral', icon: 'Mail' }],
-        [{ id: 'enrich', label: 'Automated Enrichment', sub: 'detonate URL, check hash, sender reputation', tone: 'primary', icon: 'Sparkles' }],
+        [{ id: 'enrich', label: 'Automated Enrichment', sub: 'detonate URL, hash, sender rep', tone: 'primary', icon: 'Sparkles' }],
         [{ id: 'score', label: 'Risk Scoring', sub: 'combine signals', tone: 'violet', icon: 'Gauge' }],
         [
-          { id: 'auto', label: 'Auto-Remediate', sub: 'purge from all mailboxes, block sender', tone: 'safe', icon: 'Zap' },
+          { id: 'auto', label: 'Auto-Remediate', sub: 'purge mailboxes, block sender', tone: 'safe', icon: 'Zap' },
           { id: 'human', label: 'Analyst Review', sub: 'ambiguous cases only', tone: 'warn', icon: 'UserCheck' },
         ],
         [{ id: 'close', label: 'Notify & Close', sub: 'user informed, metrics recorded', tone: 'safe', icon: 'CircleCheck' }],

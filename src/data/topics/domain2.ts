@@ -42,13 +42,13 @@ export const DOMAIN2: Topic[] = [
           { id: 'kiddie', label: 'Unskilled Attacker', sub: 'opportunity, notoriety', tone: 'neutral', icon: 'MousePointerClick' },
         ],
         [
-          { id: 'vector', label: 'Attack Vectors', sub: 'phishing, exposed service, supply chain', tone: 'violet', icon: 'Crosshair' },
+          { id: 'vector', label: 'Attack Vectors', sub: 'phishing, exposure, supply chain', tone: 'violet', icon: 'Crosshair' },
         ],
         [
           { id: 'org', label: 'Your Organisation', sub: 'people, data, systems', tone: 'primary', icon: 'Building2' },
         ],
         [
-          { id: 'impact', label: 'Impact', sub: 'data loss, downtime, fines, reputation', tone: 'danger', icon: 'TrendingDown' },
+          { id: 'impact', label: 'Impact', sub: 'data loss, downtime, fines, brand', tone: 'danger', icon: 'TrendingDown' },
         ],
       ],
       edges: [
@@ -1160,7 +1160,7 @@ export const DOMAIN2: Topic[] = [
           { id: 'ttp', label: 'TTPs', sub: 'genuinely hard to change', tone: 'danger', icon: 'BrainCircuit' },
         ],
         [{ id: 'det', label: 'Detection Engineering', sub: 'rules, analytics, hunts', tone: 'primary', icon: 'Code2' }],
-        [{ id: 'out', label: 'Durable Detection', sub: 'survives the attacker changing infrastructure', tone: 'safe', icon: 'ShieldCheck' }],
+        [{ id: 'out', label: 'Durable Detection', sub: 'survives infrastructure rotation', tone: 'safe', icon: 'ShieldCheck' }],
       ],
       edges: [
         { from: 'hash', to: 'det', tone: 'neutral' },

@@ -5,9 +5,9 @@ import type { DiagramSpec, DiagramNode } from '../types'
 import { toneOf } from '../lib/tone'
 import { getIcon } from './iconMap'
 
-const NODE_W = 186
+const NODE_W = 208
 const NODE_H = 74
-const COL_GAP = 96
+const COL_GAP = 88
 const ROW_GAP = 26
 const PAD_X = 18
 const PAD_Y = 34
@@ -175,7 +175,11 @@ export default function Diagram({ spec }: { spec: DiagramSpec }) {
                     textAnchor="middle"
                     fontSize={10.5}
                     fill={t.stroke}
-                    opacity={0.92}
+                    stroke="var(--bg)"
+                    strokeWidth={3.5}
+                    strokeLinejoin="round"
+                    paintOrder="stroke"
+                    opacity={0.95}
                     style={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}
                   >
                     {e.label}
@@ -222,7 +226,7 @@ export default function Diagram({ spec }: { spec: DiagramSpec }) {
                   fill={t.text}
                   style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
                 >
-                  {truncate(n.label, 24)}
+                  {truncate(n.label, 26)}
                 </text>
                 {n.sub && (
                   <text
@@ -233,7 +237,7 @@ export default function Diagram({ spec }: { spec: DiagramSpec }) {
                     opacity={0.66}
                     style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
                   >
-                    {truncate(n.sub, 30)}
+                    {truncate(n.sub, 37)}
                   </text>
                 )}
               </motion.g>
