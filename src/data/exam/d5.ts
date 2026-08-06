@@ -28,7 +28,12 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-05', domain: 5, objective: '5.2', difficulty: 'Medium', topic: 'risk-management',
     q: 'What distinguishes risk appetite from risk tolerance?',
-    options: ['They are interchangeable terms', 'Appetite is the amount of risk the organisation is willing to accept in pursuit of objectives; tolerance is the acceptable variation around that level', 'Appetite applies only to financial risk', 'Tolerance is set by regulators'],
+    options: [
+      "The two terms are used interchangeably in risk management practice",
+      "Appetite is the risk level pursued deliberately; tolerance is acceptable variation around it",
+      "Appetite applies to financial exposure while tolerance applies to technical risk",
+      "Tolerance is imposed externally by regulators and appetite is set internally",
+    ],
     answer: 1,
     explain: 'Appetite is the strategic target level set by leadership. Tolerance defines how far actual risk may deviate before escalation is required.' },
 
@@ -40,7 +45,7 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-07', domain: 5, objective: '5.2', difficulty: 'Medium', topic: 'risk-management',
     q: 'What is the purpose of a risk register?',
-    options: ['To list all software licences', 'To record each risk with its owner, scores, treatment and review date', 'To track help desk tickets', 'To catalogue network devices'],
+    options: ["To list every software licence held and its renewal date", 'To record each risk with its owner, scores, treatment and review date', 'To track help desk tickets', 'To catalogue network devices'],
     answer: 1,
     explain: 'The register is the single most useful artefact in a risk programme, making risks visible, owned and reviewable rather than implicit.' },
 
@@ -52,7 +57,12 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-09', domain: 5, objective: '5.2', difficulty: 'Medium', topic: 'risk-management',
     q: 'What is a key risk indicator used for?',
-    options: ['Recording completed incidents', 'Providing early warning that a risk is increasing before it materialises', 'Measuring employee satisfaction', 'Tracking software versions'],
+    options: [
+      "A record of incidents that have already been investigated and closed",
+      "A leading metric giving early warning that a risk is trending upward",
+      "A measure of employee satisfaction with the security control set",
+      "An inventory of software versions deployed across the estate",
+    ],
     answer: 1,
     explain: 'KRIs are leading metrics. A rising trend prompts action while there is still time, rather than reporting damage after the fact.' },
 
@@ -70,13 +80,18 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-12', domain: 5, objective: '5.1', difficulty: 'Easy', topic: 'governance-policies',
     q: 'What is the purpose of an acceptable use policy?',
-    options: ['To define encryption algorithms', 'To set out how organisational systems and data may and may not be used by staff', 'To document incident response steps', 'To specify backup retention periods'],
+    options: ['To define encryption algorithms', 'To set out how organisational systems and data may and may not be used by staff', "To document the incident response steps followed after a breach", 'To specify backup retention periods'],
     answer: 1,
     explain: 'The AUP defines acceptable behaviour on organisational systems and is typically acknowledged by every employee at onboarding.' },
 
   { id: 'd5-13', domain: 5, objective: '5.1', difficulty: 'Medium', topic: 'governance-policies',
     q: 'A policy requires encryption at rest but no standards or procedures exist and there is no exception process. What is the likely outcome?',
-    options: ['Full compliance across the estate', 'Widespread non-compliance and repeated audit findings, because teams cannot operationalise the requirement', 'Automatic enforcement by the operating system', 'Reduced audit scope'],
+    options: [
+      "The estate achieves full compliance because the policy is unambiguous",
+      "Teams cannot operationalise it, producing non-compliance and repeat findings",
+      "The requirement is enforced automatically by the operating system",
+      "Audit scope is reduced because the intent has been clearly stated",
+    ],
     answer: 1,
     explain: 'Policy without supporting standards, procedures and an exception route is aspiration rather than control, and produces findings rather than security.' },
 
@@ -88,7 +103,12 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-15', domain: 5, objective: '5.1', difficulty: 'Medium', topic: 'governance-policies',
     q: 'Why does an asset with no documented business owner represent a governance risk?',
-    options: ['It costs more to run', 'Nobody approves patching, requests monitoring or authorises action during an incident', 'It cannot be backed up', 'It always runs legacy software'],
+    options: [
+      "Ownerless systems are more expensive to run than owned equivalents",
+      "Nobody approves patching, requests monitoring or authorises incident action",
+      "The system cannot be included in the nightly backup schedule",
+      "Systems without owners invariably run unsupported legacy software",
+    ],
     answer: 1,
     explain: 'Ownerless assets fall out of every process. Maintaining named owners in the asset register, reviewed after reorganisations, prevents this.' },
 
@@ -100,7 +120,12 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-17', domain: 5, objective: '5.3', difficulty: 'Medium', topic: 'third-party-risk',
     q: 'What is the primary limitation of assessing a vendor only at onboarding?',
-    options: ['It is too expensive', 'Vendor risk changes over time through breaches, acquisitions, staff turnover and new subcontractors', 'Questionnaires are always accurate', 'It duplicates internal audit work'],
+    options: [
+      "Independent assessment is prohibitively expensive to repeat annually",
+      "Vendor risk changes through breaches, acquisitions, turnover and subcontractors",
+      "Questionnaire responses are accurate and therefore need no revalidation",
+      "The activity duplicates work already performed by internal audit",
+    ],
     answer: 1,
     explain: 'A point-in-time assessment reflects one moment. Continuous or periodic monitoring is required because the risk is dynamic.' },
 
@@ -112,13 +137,18 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-19', domain: 5, objective: '5.3', difficulty: 'Medium', topic: 'third-party-risk',
     q: 'Which document defines the specific deliverables, timeline and acceptance criteria for a particular engagement?',
-    options: ['NDA', 'Statement of work', 'Business partnership agreement', 'Acceptable use policy'],
+    options: ['NDA', 'Statement of work', "A business partnership agreement covering the commercial relationship", 'Acceptable use policy'],
     answer: 1,
     explain: 'The SOW sits under a master services agreement and defines what will actually be delivered, when, and how completion is judged.' },
 
   { id: 'd5-20', domain: 5, objective: '5.3', difficulty: 'Hard', topic: 'third-party-risk',
     q: 'Which control set best limits the impact of a compromised managed service provider with remote access into your environment?',
-    options: ['Trusting the provider security attestation alone', 'Segmented and scoped access, named individual accounts with MFA, just-in-time approval and distinct monitoring', 'Providing shared administrator credentials for convenience', 'Removing all logging to reduce noise'],
+    options: [
+      "Relying on the security attestation the provider supplies at contract signing",
+      "Scoped access, named accounts with MFA, just-in-time approval and monitoring",
+      "Issuing shared administrator credentials so support calls resolve faster",
+      "Reducing logging on provider activity to keep the SIEM volume manageable",
+    ],
     answer: 1,
     explain: 'Assume the provider can be compromised and design accordingly. Least privilege and monitoring apply to vendors exactly as they do to employees.' },
 
@@ -136,7 +166,12 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-23', domain: 5, objective: '5.4', difficulty: 'Medium', topic: 'compliance-privacy',
     q: 'Why is passing a compliance audit not equivalent to being secure?',
-    options: ['Audits are usually incorrect', 'Compliance assesses a minimum baseline at a point in time and often accepts documentation as evidence of effectiveness', 'Compliance frameworks are optional', 'Auditors never examine controls'],
+    options: [
+      "Audit findings are frequently incorrect and should be challenged",
+      "It assesses a minimum baseline at one point in time, often from documentation",
+      "Compliance frameworks are voluntary and carry no real obligation",
+      "Auditors examine policy documents but never test technical controls",
+    ],
     answer: 1,
     explain: 'Compliance is necessary but not sufficient. Effectiveness must be measured through testing, simulation and operational metrics.' },
 
@@ -148,7 +183,7 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-25', domain: 5, objective: '5.4', difficulty: 'Medium', topic: 'compliance-privacy',
     q: 'Which consequence of non-compliance is typically the most damaging over the long term?',
-    options: ['The direct fine amount', 'Loss of customer trust and contractual relationships', 'The cost of the audit itself', 'Additional documentation effort'],
+    options: ['The direct fine amount', 'Loss of customer trust and contractual relationships', 'The cost of the audit itself', "The additional documentation effort imposed on operational teams"],
     answer: 1,
     explain: 'Fines are bounded and one-off. Reputational damage and lost contracts compound over years and are far harder to reverse.' },
 
@@ -160,36 +195,66 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-27', domain: 5, objective: '5.4', difficulty: 'Hard', topic: 'compliance-privacy',
     q: 'Attackers steal regulated personal data and threaten to report the breach to the regulator unless paid. Which preparation most reduces this leverage?',
-    options: ['Paying quickly to avoid publicity', 'Minimising and deleting regulated data you do not need, plus prepared notification procedures and legal contacts', 'Disabling breach detection', 'Storing data in more locations'],
+    options: [
+      "Paying rapidly to prevent the breach becoming publicly known",
+      "Minimising the regulated data held, plus prepared notification procedures",
+      "Disabling breach detection so the timeline of awareness starts later",
+      "Distributing copies across more systems to avoid a single point of loss",
+    ],
     answer: 1,
     explain: 'Data you do not hold cannot be stolen, and prepared procedures mean the notification clock is not consumed by drafting and indecision.' },
 
   { id: 'd5-28', domain: 5, objective: '5.5', difficulty: 'Medium', topic: 'audits-assessments',
     q: 'What is the difference between a SOC 2 Type I and a Type II report?',
-    options: ['Type I covers more systems', 'Type I assesses control design at a point in time; Type II assesses operating effectiveness over a period', 'Type II is self-assessed', 'There is no meaningful difference'],
+    options: [
+      "Type I covers a broader range of systems and business processes",
+      "Type I assesses design at a point in time; Type II assesses operation over a period",
+      "Type II is a self-assessment whereas Type I involves an external auditor",
+      "There is no meaningful difference beyond the report cover page",
+    ],
     answer: 1,
     explain: 'Type II requires evidence that controls operated consistently across a defined period, typically six to twelve months.' },
 
   { id: 'd5-29', domain: 5, objective: '5.5', difficulty: 'Medium', topic: 'audits-assessments',
     q: 'Why does internal audit typically report to the audit committee rather than to IT management?',
-    options: ['To reduce cost', 'To preserve independence so findings about IT can be raised without conflict of interest', 'Because IT lacks technical expertise', 'To accelerate remediation'],
+    options: [
+      "Reporting elsewhere would materially increase the cost of the function",
+      "It preserves independence so findings about IT can be raised without conflict",
+      "The IT function lacks the technical expertise to interpret audit findings",
+      "It accelerates remediation by shortening the escalation path",
+    ],
     answer: 1,
     explain: 'Independence is the foundation of audit credibility. Reporting into the function being audited would compromise it.' },
 
   { id: 'd5-30', domain: 5, objective: '5.5', difficulty: 'Medium', topic: 'audits-assessments',
     q: 'An auditor samples 25 change tickets and finds 3 lacking documented approval. What is the likely outcome?',
-    options: ['No finding, since most were compliant', 'A finding on change management operating effectiveness, requiring remediation', 'Immediate certification', 'A reduction in audit scope'],
+    options: [
+      "No finding is raised because the majority of sampled tickets complied",
+      "A finding on change management effectiveness, extrapolated to the population",
+      "The organisation is certified because the exception rate is below fifteen percent",
+      "The audit scope is reduced to exclude the change management process",
+    ],
     answer: 1,
     explain: 'Sampling exceptions indicate the control did not operate consistently, and auditors typically extrapolate from the sample to the population.' },
 { id: 'd5-31', domain: 5, objective: '5.5', difficulty: 'Medium', topic: 'audits-assessments',
     q: 'What distinguishes design effectiveness from operating effectiveness in a control test?',
-    options: ['They are the same test', 'Design asks whether the control would work if performed properly; operating asks whether it actually was performed throughout the period', 'Design applies only to technical controls', 'Operating effectiveness is assessed by the vendor'],
+    options: [
+      "The two assessments are the same test described in different language",
+      "Design asks whether it would work; operating asks whether it actually did",
+      "Design effectiveness applies only to technical rather than manual controls",
+      "Operating effectiveness is asserted by the vendor rather than tested",
+    ],
     answer: 1,
     explain: 'A quarterly access review that is well documented but skipped twice is well designed and not operating effectively.' },
 
   { id: 'd5-32', domain: 5, objective: '5.5', difficulty: 'Hard', topic: 'audits-assessments',
     q: 'An organisation passes its compliance assessment but is breached through an adjacent system that was out of scope. What does this illustrate?',
-    options: ['The assessment was fraudulent', 'Scope boundaries must be validated and baseline controls applied across the whole estate, not only inside the assessed perimeter', 'Compliance frameworks are worthless', 'The breach was unavoidable'],
+    options: [
+      "The assessment was performed fraudulently and should be challenged",
+      "Scope boundaries must be validated and baseline controls applied estate-wide",
+      "Compliance frameworks provide no security value and can be disregarded",
+      "The breach was unavoidable because no control set is ever complete",
+    ],
     answer: 1,
     explain: 'Attackers do not respect audit boundaries. Segmentation between in-scope and out-of-scope environments must be real and tested.' },
 
@@ -207,7 +272,12 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-35', domain: 5, objective: '5.6', difficulty: 'Medium', topic: 'security-awareness',
     q: 'Why should organisations avoid punitive responses to staff who click simulated phishing links?',
-    options: ['Punishment is unlawful', 'It discourages reporting, which increases the time real incidents remain undetected', 'It is administratively expensive', 'Simulations are inherently unfair'],
+    options: [
+      "Punitive measures of this kind are prohibited by employment legislation",
+      "It suppresses reporting, extending the time real incidents go undetected",
+      "Administering disciplinary processes consumes disproportionate management time",
+      "Simulation exercises are inherently unfair and produce unreliable data",
+    ],
     answer: 1,
     explain: 'Fear of consequences suppresses reporting. The organisational goal is early disclosure, which requires psychological safety.' },
 
@@ -225,7 +295,7 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-38', domain: 5, objective: '5.6', difficulty: 'Medium', topic: 'security-awareness',
     q: 'Which practice most improves the likelihood that employees report suspicious email?',
-    options: ['Lengthy annual compliance modules', 'A single-click report button with immediate acknowledgement and visible follow-up', 'Publishing a list of employees who clicked', 'Disabling external email'],
+    options: ['Lengthy annual compliance modules', 'A single-click report button with immediate acknowledgement and visible follow-up', "Publishing a list of employees who clicked the simulated link", "Disabling external email entirely for all non-management staff"],
     answer: 1,
     explain: 'Friction is the main barrier to reporting. Reducing effort and closing the loop with the reporter drives participation up.' },
 
@@ -237,13 +307,23 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-40', domain: 5, objective: '3.4', difficulty: 'Medium', topic: 'business-continuity-dr',
     q: 'Why should disaster recovery documentation be available offline?',
-    options: ['To reduce storage cost', 'Because the systems hosting it may be unavailable or encrypted during the very event the plan addresses', 'To satisfy printing requirements', 'To improve document search performance'],
+    options: [
+      "Storing documentation offline materially reduces cloud storage cost",
+      "The systems hosting it may be unavailable during the event it addresses",
+      "Printed copies are required for regulatory submission after an incident",
+      "Offline documents can be searched faster than their online equivalents",
+    ],
     answer: 1,
     explain: 'A plan readable only on systems that are down is not a plan. Offline copies and out-of-band communication channels are essential.' },
 
   { id: 'd5-41', domain: 5, objective: '3.4', difficulty: 'Medium', topic: 'business-continuity-dr',
     q: 'What distinguishes business continuity planning from disaster recovery planning?',
-    options: ['They are identical', 'BCP keeps critical business functions operating, including manually; DRP restores the technology those functions depend on', 'BCP applies only to natural disasters', 'DRP is performed by the finance team'],
+    options: [
+      "The two disciplines are identical and the terms are interchangeable",
+      "BCP keeps business functions running, including manually; DRP restores technology",
+      "BCP addresses natural disasters only and DRP addresses cyber incidents",
+      "DRP is owned by the finance function and BCP by the IT function",
+    ],
     answer: 1,
     explain: 'BCP is business-facing and may include manual workarounds. DRP is technology-facing and covers restoration sequence and failover.' },
 
@@ -255,13 +335,23 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-43', domain: 5, objective: '3.4', difficulty: 'Medium', topic: 'business-continuity-dr',
     q: 'Which practice ensures backup infrastructure survives an estate-wide credential compromise?',
-    options: ['Joining backup servers to the production domain for convenience', 'Keeping backup infrastructure on separate credentials outside the production identity domain', 'Using the same administrator password everywhere', 'Disabling backup logging'],
+    options: [
+      "Joining backup servers to the production domain to simplify administration",
+      "Keeping backup infrastructure on separate credentials outside production identity",
+      "Reusing one administrator password so recovery is not delayed by lookups",
+      "Disabling backup job logging to reduce the volume sent to the SIEM",
+    ],
     answer: 1,
     explain: 'If the backup platform trusts the same compromised identities, the attacker deletes recovery points before encrypting. Credential separation is essential.' },
 
   { id: 'd5-44', domain: 5, objective: '3.4', difficulty: 'Medium', topic: 'business-continuity-dr',
     q: 'Which planning consideration addresses the loss of a single individual with irreplaceable knowledge?',
-    options: ['Load balancing', 'Succession planning and documented procedures', 'Data deduplication', 'Certificate pinning'],
+    options: [
+      "Load balancing requests across a larger pool of available staff",
+      "Succession planning and documented procedures for critical roles",
+      "Deduplicating stored data so less institutional knowledge is required",
+      "Pinning certificates so systems continue operating without intervention",
+    ],
     answer: 1,
     explain: 'Continuity is not only about systems. Succession planning and cross-training remove the single point of failure represented by one person.' },
 
@@ -279,31 +369,46 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-47', domain: 5, objective: '5.4', difficulty: 'Medium', topic: 'compliance-privacy',
     q: 'What is the purpose of a privacy impact assessment?',
-    options: ['To measure network latency', 'To evaluate privacy risks before launching a new processing activity', 'To test backup restoration', 'To score vulnerability severity'],
+    options: ['To measure network latency', 'To evaluate privacy risks before launching a new processing activity', 'To test backup restoration', "To score the severity of vulnerabilities found during assessment"],
     answer: 1,
     explain: 'A PIA or DPIA identifies privacy risk during design, when it is cheapest to address, and evidences accountability to regulators.' },
 
   { id: 'd5-48', domain: 5, objective: '5.4', difficulty: 'Medium', topic: 'compliance-privacy',
     q: 'Which activity is a prerequisite for fulfilling data subject access and erasure requests?',
-    options: ['Encrypting all backups', 'Maintaining a data inventory and records of processing so personal data can be located across all systems', 'Installing a next-generation firewall', 'Extending log retention'],
+    options: [
+      "Encrypting every backup set held in the off-site archive",
+      "Maintaining a data inventory so personal data can be located across systems",
+      "Deploying a next-generation firewall at the internet perimeter",
+      "Extending log retention so historical access can be reconstructed",
+    ],
     answer: 1,
     explain: 'You cannot produce or delete what you cannot find. Data mapping is the operational foundation of privacy rights.' },
 
   { id: 'd5-49', domain: 5, objective: '5.2', difficulty: 'Medium', topic: 'risk-management',
     q: 'A development environment holds a copy of production customer data but is rated low criticality. What is the core problem?',
-    options: ['Development environments never need protection', 'The rating ignores the sensitivity of the data actually held, so controls are inappropriately weak', 'Test data cannot be encrypted', 'Developers require administrator rights'],
+    options: [
+      "Development environments carry no meaningful risk by definition",
+      "The rating ignores the sensitivity of the data actually held there",
+      "Test data cannot technically be encrypted in a development database",
+      "Developers require administrator rights, which forces a low rating",
+    ],
     answer: 1,
     explain: 'Environments must be rated by the sensitivity of the data they contain. The safer answer is to mask or synthesise rather than copy production data.' },
 
   { id: 'd5-50', domain: 5, objective: '5.1', difficulty: 'Medium', topic: 'governance-policies',
     q: 'Which control addresses the risk of a single employee concealing fraudulent activity indefinitely?',
-    options: ['Longer passwords', 'Mandatory vacation combined with job rotation', 'Faster network links', 'More frequent backups'],
+    options: ['Longer passwords', 'Mandatory vacation combined with job rotation', 'Faster network links', "More frequent backups combined with longer retention periods"],
     answer: 1,
     explain: 'Both force another person into the role, surfacing activity that depends on continuous concealment by one individual.' },
 
   { id: 'd5-51', domain: 5, objective: '5.6', difficulty: 'Medium', topic: 'security-awareness',
     q: 'Which onboarding step most directly establishes an employee obligations regarding organisational data?',
-    options: ['Issuing a laptop', 'Signed acknowledgement of the acceptable use and information security policies', 'Assigning a desk', 'Adding them to the payroll system'],
+    options: [
+      "Issuing a laptop configured to the corporate security baseline",
+      "Signed acknowledgement of the acceptable use and information security policies",
+      "Assigning a desk within the appropriate departmental floor plan",
+      "Adding the individual to the payroll and benefits administration system",
+    ],
     answer: 1,
     explain: 'Documented acknowledgement establishes awareness and creates the basis for enforcement if policy is later breached.' },
 
@@ -315,19 +420,29 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-53', domain: 5, objective: '5.3', difficulty: 'Medium', topic: 'third-party-risk',
     q: 'Which element should be defined at contract signing but is most often neglected until it is needed?',
-    options: ['The logo usage guidelines', 'Exit and data return arrangements including format and deletion evidence', 'The invoicing address', 'The account manager name'],
+    options: [
+      "Brand and logo usage guidelines for joint marketing material",
+      "Exit and data return arrangements including format and deletion evidence",
+      "The invoicing address and preferred payment terms for the engagement",
+      "The named account manager and their escalation contact details",
+    ],
     answer: 1,
     explain: 'Planning the exit at the start prevents being held hostage by a provider at termination and ensures your data is returned and then deleted.' },
 
   { id: 'd5-54', domain: 5, objective: '5.2', difficulty: 'Medium', topic: 'risk-management',
     q: 'Which risk category covers the possibility that a supplier ceases trading mid-contract?',
-    options: ['Technical risk', 'Operational and third-party risk', 'Cryptographic risk', 'Physical risk'],
+    options: ['Technical risk', 'Operational and third-party risk', "Cryptographic risk arising from the algorithms the supplier uses", 'Physical risk'],
     answer: 1,
     explain: 'Supplier viability is assessed during due diligence alongside security posture, because commercial failure disrupts service just as effectively as a breach.' },
 
   { id: 'd5-55', domain: 5, objective: '5.1', difficulty: 'Hard', topic: 'governance-policies',
     q: 'An engineer skips a required control to meet a deadline and records the decision in a chat message. What is wrong with this?',
-    options: ['Nothing, provided the project ships on time', 'Risk acceptance must be documented in business terms and approved by an owner with authority to accept that exposure', 'Chat messages cannot be retained', 'The control was probably unnecessary'],
+    options: [
+      "Nothing, provided the project delivers within the committed timeline",
+      "Acceptance must be documented in business terms and approved by an owner",
+      "Chat messages cannot be retained long enough to serve as a record",
+      "The control was evidently unnecessary if the project shipped without it",
+    ],
     answer: 1,
     explain: 'Risk acceptance is a business decision requiring an accountable owner and a review date, not an engineering shortcut recorded informally.' },
 
@@ -339,25 +454,40 @@ export const EXAM_D5: ExamQuestion[] = [
 
   { id: 'd5-57', domain: 5, objective: '5.5', difficulty: 'Medium', topic: 'audits-assessments',
     q: 'Which practice turns annual audit preparation from a scramble into a routine?',
-    options: ['Hiring more auditors', 'Automated continuous control testing producing evidence throughout the year', 'Reducing the audit scope', 'Delaying the audit'],
+    options: [
+      "Engaging a larger audit firm with more available field staff",
+      "Automated continuous control testing producing evidence throughout the year",
+      "Narrowing the audit scope so fewer controls are sampled each cycle",
+      "Deferring the audit until the remediation backlog has been cleared",
+    ],
     answer: 1,
     explain: 'Compliance-as-code generates evidence continuously, so the audit samples an existing record rather than triggering a manual collection exercise.' },
 
   { id: 'd5-58', domain: 5, objective: '3.4', difficulty: 'Medium', topic: 'business-continuity-dr',
     q: 'A recovery plan assumes Active Directory and DNS are available, but both are encrypted during a ransomware event. What does this reveal?',
-    options: ['The plan is adequate', 'Recovery sequencing was never tested end to end, only individual server restores', 'Backups were unnecessary', 'The incident was unforeseeable'],
+    options: [
+      "The plan is adequate because individual server restores were tested",
+      "Recovery sequencing was never tested end to end, only single-system restores",
+      "Backups proved unnecessary because replication covered the failure",
+      "The scenario was unforeseeable and no planning could have anticipated it",
+    ],
     answer: 1,
     explain: 'Full rebuild exercises expose dependency assumptions that single-server restore tests never surface. Recovery of the recovery infrastructure must come first.' },
 
   { id: 'd5-59', domain: 5, objective: '5.2', difficulty: 'Medium', topic: 'risk-management',
     q: 'Which statement about qualitative and quantitative risk analysis is most accurate?',
-    options: ['Quantitative is always superior', 'Qualitative is faster and useful for prioritisation; quantitative supports cost-benefit arguments but needs data that is often unavailable', 'Qualitative produces monetary figures', 'They cannot be used together'],
+    options: [
+      "Quantitative analysis is superior in every circumstance",
+      "Qualitative is faster for triage; quantitative supports investment cases but needs data",
+      "Qualitative analysis produces precise monetary loss figures",
+      "The two methods cannot be applied to the same risk population",
+    ],
     answer: 1,
     explain: 'Mature programmes use both — qualitative to triage the population, quantitative on the small number of risks where investment decisions are being made.' },
 
   { id: 'd5-60', domain: 5, objective: '5.1', difficulty: 'Medium', topic: 'governance-policies',
     q: 'Which practice ensures policies remain relevant rather than becoming shelfware?',
-    options: ['Publishing them once and archiving them', 'Assigning owners and scheduled review dates, with revision triggered by significant change', 'Making them as long as possible', 'Restricting access so staff cannot read them'],
+    options: ['Publishing them once and archiving them', 'Assigning owners and scheduled review dates, with revision triggered by significant change', "Writing them at maximum length so no scenario is left uncovered", "Restricting document access so staff cannot read policy directly"],
     answer: 1,
     explain: 'Owned, dated and periodically reviewed documents stay aligned with the environment. Unreviewed policy diverges from reality and loses authority.' },
 ]

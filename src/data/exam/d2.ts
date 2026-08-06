@@ -10,7 +10,7 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-02', domain: 2, objective: '2.1', difficulty: 'Medium', topic: 'threat-actors',
     q: 'Which characteristic most distinguishes a nation-state actor from an organised crime group?',
-    options: ['Exclusive use of custom malware', 'Willingness to maintain covert access for years without monetising it', 'Targeting only government networks', 'Refusal to use phishing'],
+    options: ['Exclusive use of custom malware', 'Willingness to maintain covert access for years without monetising it', "Restricting operations exclusively to government and defence networks", "An unwillingness to use phishing as an initial access technique"],
     answer: 1,
     explain: 'Funding, patience and tolerance for long dwell time define APT activity. Criminal groups need a return on investment quickly.' },
 
@@ -46,25 +46,40 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-08', domain: 2, objective: '2.4', difficulty: 'Hard', topic: 'malware-types',
     q: 'An intrusion uses only signed native Windows binaries and writes nothing to disk. Which detection approach is most likely to catch it?',
-    options: ['Signature-based antivirus scanning', 'Behavioural detection based on process lineage and command line auditing', 'Weekly full disk scans', 'File integrity monitoring on system32'],
+    options: ['Signature-based antivirus scanning', 'Behavioural detection based on process lineage and command line auditing', "Weekly full disk scanning scheduled outside business hours", "File integrity monitoring applied to the system directories on each host"],
     answer: 1,
     explain: 'Living-off-the-land techniques leave no malicious file to match. Process relationships and encoded command lines remain visible in telemetry.' },
 
   { id: 'd2-09', domain: 2, objective: '2.4', difficulty: 'Easy', topic: 'malware-types',
     q: 'Software disguised as a legitimate utility that installs a remote access capability is best described as which of the following?',
-    options: ['Worm', 'Remote access trojan', 'Rootkit', 'Ransomware'],
+    options: [
+      "A worm that copies itself to every reachable host on the subnet",
+      "A trojan providing interactive remote control of the compromised host",
+      "A rootkit that hides its presence by subverting kernel system calls",
+      "Ransomware that encrypts user documents and demands a payment",
+    ],
     answer: 1,
     explain: 'A trojan relies on deception to be executed. A RAT is a trojan whose payload provides interactive remote control of the host.' },
 
   { id: 'd2-10', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'ransomware',
     q: 'A SOC analyst observes vssadmin delete shadows executed on six servers within four minutes. What should this be treated as?',
-    options: ['Routine disk maintenance', 'A backup software upgrade', 'A high-confidence ransomware precursor requiring immediate containment', 'A false positive from the EDR agent'],
-    answer: 2,
+    options: [
+      "Routine disk maintenance performed by the storage management agent",
+      "A pre-encryption ransomware indicator requiring immediate containment",
+      "A scheduled upgrade of the enterprise backup software across the estate",
+      "A known false positive produced by the endpoint agent after an update",
+    ],
+    answer: 1,
     explain: 'Bulk shadow copy deletion is a well-documented pre-encryption step and one of the highest-fidelity ransomware indicators available.' },
 
   { id: 'd2-11', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'ransomware',
     q: 'Why does an organisation with reliable backups still face a serious breach from double-extortion ransomware?',
-    options: ['Backups slow down the encryption process', 'The data was exfiltrated before encryption, so confidentiality is lost and disclosure obligations still apply', 'Backups cannot restore encrypted files', 'Double extortion disables backup software'],
+    options: [
+      "Backups slow the encryption process enough to trigger detection",
+      "Data was exfiltrated first, so confidentiality loss and disclosure duties remain",
+      "Backup software cannot restore files once they have been encrypted",
+      "Double extortion disables the backup agent before recovery points are written",
+    ],
     answer: 1,
     explain: 'Restoring from backup solves availability. It does nothing about the copy the attacker already holds, which is the entire purpose of double extortion.' },
 
@@ -76,13 +91,13 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-13', domain: 2, objective: '2.2', difficulty: 'Easy', topic: 'social-engineering-phishing',
     q: 'A targeted email appears to come from the CFO asking an accounts clerk to urgently release a payment to a new account. There is no link or attachment. What is this?',
-    options: ['Watering hole attack', 'Business email compromise', 'Smishing', 'Pharming'],
+    options: ['Watering hole attack', 'Business email compromise', "Smishing, delivered through the corporate mobile messaging platform", 'Pharming'],
     answer: 1,
     explain: 'BEC impersonates a trusted authority to trigger a financial action. No malicious payload is required, which is why technical scanning rarely catches it.' },
 
   { id: 'd2-14', domain: 2, objective: '2.2', difficulty: 'Medium', topic: 'social-engineering-phishing',
     q: 'Which control most reliably prevents supplier bank detail redirection fraud?',
-    options: ['Antivirus on the mail gateway', 'Out-of-band verification using contact details already held on file', 'A longer password policy', 'Blocking all external email attachments'],
+    options: ['Antivirus on the mail gateway', 'Out-of-band verification using contact details already held on file', 'A longer password policy', "Blocking all inbound email attachments at the secure email gateway"],
     answer: 1,
     explain: 'BEC contains no malware, so scanning cannot detect it. Verification through a channel the attacker does not control is the effective control.' },
 
@@ -130,7 +145,7 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-22', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'network-attacks',
     q: 'An attacker sends forged ARP replies so a victim associates the gateway IP with the attacker MAC address. What is the immediate result?',
-    options: ['The victim loses all connectivity', 'The attacker gains an on-path position able to read and modify traffic', 'The gateway is denied service', 'DNS records are permanently altered'],
+    options: ['The victim loses all connectivity', 'The attacker gains an on-path position able to read and modify traffic', 'The gateway is denied service', "DNS resource records are permanently altered at the authoritative server"],
     answer: 1,
     explain: 'ARP spoofing places the attacker in the traffic path. Dynamic ARP Inspection combined with DHCP snooping is the standard switch-level mitigation.' },
 
@@ -142,7 +157,12 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-24', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'network-attacks',
     q: 'Which control best defends against a replay attack?',
-    options: ['Increasing key length', 'Nonces, timestamps or sequence numbers within the protocol', 'Port security on the switch', 'Additional bandwidth'],
+    options: [
+      "Increasing the symmetric key length used to protect the session",
+      "Including nonces, timestamps or sequence numbers within the protocol",
+      "Enabling port security to limit MAC addresses per switch interface",
+      "Provisioning additional bandwidth so the duplicate traffic is absorbed",
+    ],
     answer: 1,
     explain: 'Replay protection requires the receiver to recognise that a valid-looking message has already been seen, which needs a one-time or time-bound value.' },
 
@@ -178,13 +198,18 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-30', domain: 2, objective: '2.3', difficulty: 'Medium', topic: 'application-attacks',
     q: 'Which pair of controls best mitigates stored cross-site scripting?',
-    options: ['Input length limits and CAPTCHA', 'Contextual output encoding and a strict Content Security Policy', 'Database encryption and RAID', 'Rate limiting and IP allow-listing'],
+    options: ['Input length limits and CAPTCHA', 'Contextual output encoding and a strict Content Security Policy', 'Database encryption and RAID', "Request rate limiting combined with source IP address allow-listing"],
     answer: 1,
     explain: 'Encoding at render time neutralises the payload in whichever context it appears, and a CSP that forbids inline script provides defence in depth.' },
 
   { id: 'd2-31', domain: 2, objective: '2.3', difficulty: 'Medium', topic: 'application-attacks',
     q: 'An upload feature validates a file and processes it moments later, allowing an attacker to substitute the file in between. What class of flaw is this?',
-    options: ['Buffer overflow', 'Time-of-check to time-of-use race condition', 'Improper error handling', 'Memory leak'],
+    options: [
+      "A buffer overflow caused by writing past an allocated memory region",
+      "A time-of-check to time-of-use race condition in the validation logic",
+      "Improper error handling that discloses internal paths to the user",
+      "A memory leak that gradually exhausts the available heap space",
+    ],
     answer: 1,
     explain: 'TOCTOU race conditions exploit the window between validating a resource and acting on it. Atomic operations and locking are the mitigations.' },
 
@@ -201,13 +226,23 @@ export const EXAM_D2: ExamQuestion[] = [
     explain: 'A false positive is a reported issue that is not real. Validating and tuning matters because unchecked false positives destroy confidence in the whole programme.' },
 { id: 'd2-34', domain: 2, objective: '4.3', difficulty: 'Medium', topic: 'vulnerability-management',
     q: 'Which prioritisation source indicates that a vulnerability is being actively exploited in the wild right now?',
-    options: ['CVSS base score', 'CPE identifier', 'CISA Known Exploited Vulnerabilities catalogue', 'CWE classification'],
-    answer: 2,
+    options: [
+      "The CVSS base score, which expresses the technical severity of the flaw",
+      "The CISA Known Exploited Vulnerabilities catalogue of in-the-wild exploitation",
+      "The CPE identifier, which names the affected product and version range",
+      "The CWE classification, which describes the underlying weakness type",
+    ],
+    answer: 1,
     explain: 'The KEV catalogue lists flaws with confirmed in-the-wild exploitation. CVSS measures theoretical severity, CPE names products and CWE classifies weakness types.' },
 
   { id: 'd2-35', domain: 2, objective: '4.3', difficulty: 'Medium', topic: 'vulnerability-management',
     q: 'Why does a credentialed scan generally produce better results than an unauthenticated one?',
-    options: ['It completes faster', 'It inspects installed package versions and configuration directly, reducing false positives', 'It does not require an asset inventory', 'It automatically remediates findings'],
+    options: [
+      "It completes considerably faster than an unauthenticated network scan",
+      "It reads installed package versions and configuration, cutting false positives",
+      "It removes the requirement to maintain an accurate asset inventory",
+      "It automatically remediates every finding it identifies on the host",
+    ],
     answer: 1,
     explain: 'Credentialed scans examine the system from the inside rather than inferring from network banners, so they detect far more and guess far less.' },
 
@@ -225,13 +260,18 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-38', domain: 2, objective: '4.3', difficulty: 'Medium', topic: 'vulnerability-management',
     q: 'After emergency-patching an internet-facing appliance that was subject to mass exploitation, what additional step is essential?',
-    options: ['Reboot the appliance twice', 'Hunt for indicators that the device was already compromised before the patch', 'Disable logging to reduce noise', 'Extend the maintenance window'],
+    options: [
+      "Reboot the appliance a second time to clear any residual state",
+      "Hunt for evidence that the device was compromised before the patch landed",
+      "Disable logging temporarily to reduce noise during the change window",
+      "Extend the maintenance window to allow for a slower rollout",
+    ],
     answer: 1,
     explain: 'Patching closes the door but does not remove an implant placed earlier. Systems exposed during the mass exploitation window must be investigated, not assumed clean.' },
 
   { id: 'd2-39', domain: 2, objective: '5.5', difficulty: 'Medium', topic: 'penetration-testing',
     q: 'What most fundamentally distinguishes a penetration test from a vulnerability scan?',
-    options: ['Scans are manual, tests are automated', 'Tests exploit findings to demonstrate real impact and chain weaknesses together', 'Scans require written authorisation, tests do not', 'Scans always find more issues'],
+    options: ['Scans are manual, tests are automated', 'Tests exploit findings to demonstrate real impact and chain weaknesses together', "Scanning requires written authorisation whereas testing does not", 'Scans always find more issues'],
     answer: 1,
     explain: 'Scanning identifies potential weaknesses. Testing proves exploitability and reveals the attack path an adversary would actually take.' },
 
@@ -243,7 +283,12 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-41', domain: 2, objective: '5.5', difficulty: 'Medium', topic: 'penetration-testing',
     q: 'Why are documented rules of engagement essential before testing begins?',
-    options: ['They guarantee no system will crash', 'They define scope, timing and permitted techniques and provide the authorisation that separates testing from a criminal offence', 'They speed up the scan', 'They are required to license the tooling'],
+    options: [
+      "They guarantee that no production system will crash during testing",
+      "They define scope and technique and provide the authorisation that makes testing lawful",
+      "They shorten the engagement by removing the reconnaissance phase",
+      "They are required by vendors before commercial tooling can be licensed",
+    ],
     answer: 1,
     explain: 'Without documented authorisation the same activity constitutes unauthorised access. Rules of engagement also protect production systems and define escalation paths.' },
 
@@ -255,49 +300,89 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-43', domain: 2, objective: '5.5', difficulty: 'Medium', topic: 'penetration-testing',
     q: 'In a purple team exercise, what is the primary objective?',
-    options: ['To achieve domain administrator as fast as possible', 'For offensive and defensive teams to work together so detections are improved in real time', 'To replace the annual audit', 'To test physical security only'],
+    options: [
+      "Running an Nmap SYN scan across the published address range",
+      "Reviewing certificate transparency logs and public job advertisements",
+      "Sending crafted packets to fingerprint the operating system version",
+      "Attempting default credentials against an exposed administration page",
+    ],
     answer: 1,
     explain: 'Purple teaming runs attack and defence collaboratively, converting each simulated technique into a validated detection rather than a report finding.' },
 
   { id: 'd2-44', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'threat-intelligence-ioc',
     q: 'According to the Pyramid of Pain, detecting which indicator type causes the most difficulty for an adversary?',
-    options: ['File hashes', 'IP addresses', 'Domain names', 'Tactics, techniques and procedures'],
-    answer: 3,
+    options: [
+      "File hashes, which change with every recompilation of the payload",
+      "Tactics, techniques and procedures, which describe how the adversary operates",
+      "IP addresses, which are rotated as infrastructure is spun up and down",
+      "Domain names, which can be registered in bulk for a few dollars each",
+    ],
+    answer: 1,
     explain: 'TTPs describe how the adversary operates. Changing them requires retooling and retraining, unlike rotating infrastructure which is trivial and cheap.' },
 
   { id: 'd2-45', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'threat-intelligence-ioc',
     q: 'What are STIX and TAXII used for?',
-    options: ['Encrypting intelligence at rest', 'A structured language for describing threat intelligence and a protocol for exchanging it', 'Scoring vulnerability severity', 'Scanning container images'],
+    options: [
+      "A pair of encryption standards protecting intelligence data at rest",
+      "A structured language for describing intelligence and a protocol for exchanging it",
+      "Two scoring systems that rank vulnerability severity and exploit likelihood",
+      "A container scanning format and its accompanying policy enforcement engine",
+    ],
     answer: 1,
     explain: 'STIX is the data format and TAXII is the transport. Together they enable machine-to-machine intelligence sharing between platforms and ISACs.' },
 
   { id: 'd2-46', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'threat-intelligence-ioc',
     q: 'Which observation is the best example of an indicator of compromise?',
-    options: ['A published CVE identifier', 'A workstation making an outbound connection to a newly registered domain every 60 seconds', 'An expired TLS certificate', 'A firewall vendor name'],
+    options: [
+      "A published CVE identifier assigned to a disclosed software flaw",
+      "A workstation beaconing to a newly registered domain every sixty seconds",
+      "An expired TLS certificate on an internal application server",
+      "A firewall vendor name appearing in the asset management database",
+    ],
     answer: 1,
     explain: 'An IOC is an observable artefact suggesting intrusion. Regular beaconing to a newly registered domain is a classic command and control pattern.' },
 
   { id: 'd2-47', domain: 2, objective: '2.4', difficulty: 'Hard', topic: 'threat-intelligence-ioc',
     q: 'A SOC blocks 40 malicious IP addresses from an advisory and closes the ticket. Why is this insufficient?',
-    options: ['Firewalls cannot block IP addresses reliably', 'Infrastructure indicators are rotated cheaply; the behavioural detail in the advisory offers more durable detection', 'IP blocking breaks business applications', 'Advisories are usually inaccurate'],
+    options: [
+      "Firewalls cannot reliably block traffic by source IP address alone",
+      "Infrastructure is rotated cheaply; behavioural detail offers more durable detection",
+      "Blocking large address ranges tends to break legitimate business applications",
+      "Government advisories are frequently inaccurate and should be treated sceptically",
+    ],
     answer: 1,
     explain: 'Adversaries assume their infrastructure will be published and treat it as disposable. Detections built on behaviour survive infrastructure changes.' },
 
   { id: 'd2-48', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'mitre-attack',
     q: 'In MITRE ATT&CK, what does a tactic represent?',
-    options: ['A specific malware family', 'The adversary tactical goal, such as achieving initial access or escalating privilege', 'A vulnerability identifier', 'A defensive control'],
+    options: [
+      "A specific malware family attributed to a named adversary group",
+      "The adversary tactical goal, such as gaining access or escalating privilege",
+      "A vulnerability identifier assigned when a flaw is publicly disclosed",
+      "A defensive control recommended to counter a particular intrusion",
+    ],
     answer: 1,
     explain: 'Tactics are the why — the adversary objective. Techniques are the how, and sub-techniques describe specific variations.' },
 
   { id: 'd2-49', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'mitre-attack',
     q: 'How does the Cyber Kill Chain differ from MITRE ATT&CK?',
-    options: ['The Kill Chain contains more techniques', 'The Kill Chain is a linear seven-stage model; ATT&CK is a non-linear, far more granular behaviour matrix', 'ATT&CK covers only cloud environments', 'They are functionally identical'],
+    options: [
+      "The Kill Chain contains substantially more techniques and sub-techniques",
+      "The Kill Chain is a linear seven-stage model; ATT&CK is a granular behaviour matrix",
+      "ATT&CK applies only to cloud environments and containerised workloads",
+      "They are functionally identical and the names are used interchangeably",
+    ],
     answer: 1,
     explain: 'The Kill Chain is a high-level sequential narrative. ATT&CK catalogues hundreds of specific behaviours that can occur in any order and repeatedly.' },
 
   { id: 'd2-50', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'mitre-attack',
     q: 'A team wants to confirm that its SIEM genuinely detects credential dumping. What is the most appropriate approach?',
-    options: ['Read the SIEM vendor documentation', 'Execute a controlled Atomic Red Team test for the technique and confirm the alert fires', 'Deploy live malware in production', 'Increase log retention to one year'],
+    options: [
+      "Read the SIEM vendor documentation describing bundled detection content",
+      "Run a controlled Atomic Red Team test and confirm the alert actually fires",
+      "Execute live ransomware on a production server and observe the response",
+      "Extend log retention to twelve months and review the data quarterly",
+    ],
     answer: 1,
     explain: 'Safe, atomic technique simulation validates detection coverage empirically without introducing real risk. Coverage you have not tested is coverage you do not have.' },
 
@@ -309,7 +394,7 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-52', domain: 2, objective: '2.2', difficulty: 'Medium', topic: 'social-engineering-phishing',
     q: 'Which attack vector describes an attacker leaving USB drives in a company car park?',
-    options: ['Removable media as an attack vector', 'Watering hole', 'Supply chain attack', 'Credential stuffing'],
+    options: ['Removable media as an attack vector', 'Watering hole', "A supply chain attack delivered through a compromised hardware vendor", 'Credential stuffing'],
     answer: 0,
     explain: 'Removable media exploits curiosity to bypass network controls entirely. Disabling autorun and blocking unapproved USB devices are the countermeasures.' },
 
@@ -333,7 +418,12 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-56', domain: 2, objective: '2.5', difficulty: 'Medium', topic: 'hardening-baselines',
     q: 'Which mitigation technique most directly reduces the attack surface of a newly built server?',
-    options: ['Increasing log retention', 'Disabling unnecessary services and removing default accounts', 'Adding more RAM', 'Enabling verbose error messages'],
+    options: [
+      "Extending audit log retention so more historical data is available",
+      "Disabling unnecessary services and removing default accounts and software",
+      "Adding memory and processing capacity to improve service responsiveness",
+      "Enabling verbose application error messages to assist troubleshooting",
+    ],
     answer: 1,
     explain: 'Least functionality removes capability an attacker could use. Verbose errors would increase information disclosure rather than reduce risk.' },
 
@@ -345,19 +435,24 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-58', domain: 2, objective: '2.5', difficulty: 'Medium', topic: 'network-security-architecture',
     q: 'A worm exploits a legacy file sharing protocol across the internal network. Besides patching, which measure most limits its spread?',
-    options: ['Longer passwords', 'Network segmentation restricting east-west traffic on that protocol', 'Increasing internet bandwidth', 'Disabling the guest wireless network'],
+    options: ["Enforcing longer and more complex passwords across all accounts", 'Network segmentation restricting east-west traffic on that protocol', 'Increasing internet bandwidth', "Disabling the guest wireless network and its associated captive portal"],
     answer: 1,
     explain: 'Worms need reachable vulnerable hosts. Segmentation removes the highway, which historically has limited outbreaks more effectively than signatures.' },
 
   { id: 'd2-59', domain: 2, objective: '2.4', difficulty: 'Medium', topic: 'malware-types',
     q: 'Which indicator most strongly suggests command and control activity rather than normal browsing?',
-    options: ['Large file downloads during business hours', 'Small outbound requests at a fixed interval with jitter to a single destination', 'Multiple DNS lookups for well-known CDN domains', 'High CPU usage during a software build'],
+    options: ['Large file downloads during business hours', 'Small outbound requests at a fixed interval with jitter to a single destination', "Repeated DNS lookups for well-known content delivery network domains", 'High CPU usage during a software build'],
     answer: 1,
     explain: 'Regular beaconing with randomised jitter is characteristic of an implant checking in. Human browsing produces irregular, bursty patterns.' },
 
   { id: 'd2-60', domain: 2, objective: '2.4', difficulty: 'Hard', topic: 'threat-intelligence-ioc',
     q: 'Malware resolves a different algorithmically generated domain each day to locate its controller. Which detection approach is most effective?',
-    options: ['Blocking the specific domains observed yesterday', 'Detecting high-entropy, newly registered domain patterns and monitoring NXDOMAIN volume', 'Blocking all DNS traffic', 'Disabling recursive DNS'],
+    options: [
+      "Blocking the specific domains that were observed in yesterday traffic",
+      "Detecting high-entropy newly registered domains and monitoring NXDOMAIN volume",
+      "Blocking all outbound DNS traffic at the perimeter firewall entirely",
+      "Disabling recursive resolution on the internal DNS infrastructure",
+    ],
     answer: 1,
     explain: 'Domain generation algorithms defeat static blocklists. Statistical detection of the pattern, plus high NXDOMAIN rates from failed lookups, is the workable approach.' },
 
@@ -393,7 +488,7 @@ export const EXAM_D2: ExamQuestion[] = [
 
   { id: 'd2-66', domain: 2, objective: '2.4', difficulty: 'Hard', topic: 'ransomware',
     q: 'Which sequence best reflects a modern human-operated ransomware intrusion?',
-    options: ['Encryption, then reconnaissance, then initial access', 'Initial access, discovery and privilege escalation, exfiltration, backup destruction, then mass encryption', 'Mass encryption immediately on initial access', 'Exfiltration only, with no encryption stage'],
+    options: ["Encryption first, then reconnaissance, with initial access established last", 'Initial access, discovery and privilege escalation, exfiltration, backup destruction, then mass encryption', 'Mass encryption immediately on initial access', 'Exfiltration only, with no encryption stage'],
     answer: 1,
     explain: 'Operators dwell for days or weeks, steal data for leverage and destroy recovery points before deploying the payload. Each earlier stage is a detection opportunity.' },
 ]

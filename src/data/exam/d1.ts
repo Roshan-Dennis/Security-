@@ -124,19 +124,24 @@ export const EXAM_D1: ExamQuestion[] = [
 
   { id: 'd1-21', domain: 1, objective: '1.4', difficulty: 'Easy', topic: 'hashing-integrity',
     q: 'What is the primary purpose of adding a unique salt to each stored password hash?',
-    options: ['It speeds up verification', 'It prevents precomputed rainbow tables and stops identical passwords sharing a digest', 'It allows the password to be recovered', 'It converts hashing into encryption'],
-    answer: 1,
+    options: [
+      "It allows the original password to be recovered during account recovery",
+      "It speeds up verification by shortening the hashing work factor",
+      "It defeats precomputed rainbow tables and stops identical passwords sharing a digest",
+      "It converts the one-way hash into a reversible encryption operation",
+    ],
+    answer: 2,
     explain: 'A unique salt means no precomputation can be reused across accounts, and two users choosing the same password no longer produce the same stored value.' },
 
   { id: 'd1-22', domain: 1, objective: '1.4', difficulty: 'Medium', topic: 'hashing-integrity',
     q: 'Which algorithm is appropriate for storing user passwords?',
-    options: ['SHA-256', 'MD5 with a salt', 'Argon2id with a tuned work factor', 'AES-256 in CBC mode'],
+    options: ['SHA-256', 'MD5 with a salt', 'Argon2id with a tuned work factor', "AES-256 in CBC mode with a per-user initialisation vector"],
     answer: 2,
     explain: 'Password storage needs a deliberately slow, memory-hard key derivation function. Fast hashes such as SHA-256 and MD5 allow billions of guesses per second; AES is encryption, which is reversible.' },
 
   { id: 'd1-23', domain: 1, objective: '1.4', difficulty: 'Medium', topic: 'hashing-integrity',
     q: 'A vendor publishes a SHA-256 value alongside an installer download. What does verifying it prove?',
-    options: ['The file is free of malware', 'The file has not been altered since the vendor published that digest', 'The vendor identity is authenticated', 'The file is encrypted in transit'],
+    options: ['The file is free of malware', 'The file has not been altered since the vendor published that digest', "That the publisher identity has been cryptographically authenticated", 'The file is encrypted in transit'],
     answer: 1,
     explain: 'A published hash provides integrity only. Proving the publisher identity requires a digital signature, because an attacker who replaces the file could also replace the posted hash.' },
 
@@ -148,19 +153,24 @@ export const EXAM_D1: ExamQuestion[] = [
 
   { id: 'd1-25', domain: 1, objective: '1.4', difficulty: 'Medium', topic: 'pki-certificates',
     q: 'A browser reports that a certificate is valid but the name does not match. What is the most likely cause?',
-    options: ['The certificate has expired', 'The hostname is not listed in the subject alternative name field', 'The private key was compromised', 'The certificate authority is untrusted'],
+    options: ['The certificate has expired', 'The hostname is not listed in the subject alternative name field', 'The private key was compromised', "The issuing certificate authority is not present in the browser trust store"],
     answer: 1,
     explain: 'Name mismatch means the SAN entries do not cover the hostname requested. This occurs with shared hosting, access by IP address, or interception.' },
 
   { id: 'd1-26', domain: 1, objective: '1.4', difficulty: 'Hard', topic: 'pki-certificates',
     q: 'What advantage does OCSP stapling provide over conventional OCSP?',
-    options: ['It extends the certificate lifetime', 'The server presents a recent signed revocation status, removing a client round trip to the CA and improving privacy', 'It removes the need for a certificate authority', 'It encrypts the certificate itself'],
+    options: [
+      "It extends the certificate lifetime so renewal is needed less often",
+      "The server presents a recent signed status, removing a client round trip to the CA",
+      "It removes the need for a certificate authority in the trust chain entirely",
+      "It encrypts the certificate so intermediaries cannot read the subject name",
+    ],
     answer: 1,
     explain: 'Stapling has the server fetch and present the signed status. The client avoids contacting the CA, which is faster and stops the CA learning which clients visit which sites.' },
 
   { id: 'd1-27', domain: 1, objective: '1.4', difficulty: 'Medium', topic: 'pki-certificates',
     q: 'Why is a root CA private key normally held offline in a hardware security module?',
-    options: ['To reduce certificate issuance cost', 'Because compromise of the root invalidates trust in every certificate beneath it', 'Because roots expire every 90 days', 'To comply with DNS requirements'],
+    options: ["To reduce the operational cost of issuing certificates at high volume", 'Because compromise of the root invalidates trust in every certificate beneath it', 'Because roots expire every 90 days', 'To comply with DNS requirements'],
     answer: 1,
     explain: 'The root is the trust anchor and cannot be quickly replaced in client trust stores. It is kept offline and used only to sign intermediates.' },
 
@@ -172,7 +182,7 @@ export const EXAM_D1: ExamQuestion[] = [
 
   { id: 'd1-29', domain: 1, objective: '1.2', difficulty: 'Medium', topic: 'zero-trust',
     q: 'Which statement best expresses the core principle of zero trust?',
-    options: ['All internal traffic must be encrypted', 'Trust is never granted based on network location; every request is authenticated and authorised', 'All inbound internet traffic is blocked by default', 'Remote users must connect through a VPN'],
+    options: ['All internal traffic must be encrypted', 'Trust is never granted based on network location; every request is authenticated and authorised', "All inbound internet traffic is blocked by default at every perimeter", 'Remote users must connect through a VPN'],
     answer: 1,
     explain: 'Zero trust removes implicit trust derived from network position. Encryption and VPN replacement may form part of an implementation but are not the principle itself.' },
 
@@ -202,13 +212,13 @@ export const EXAM_D1: ExamQuestion[] = [
 
   { id: 'd1-34', domain: 1, objective: '1.3', difficulty: 'Easy', topic: 'change-management',
     q: 'Why is updating network diagrams and the configuration management database part of change management?',
-    options: ['It shortens the maintenance window', 'Accurate documentation is essential for troubleshooting, audit and incident response', 'It removes the need for approval', 'It is required for software licensing'],
+    options: ['It shortens the maintenance window', 'Accurate documentation is essential for troubleshooting, audit and incident response', 'It removes the need for approval', "It is a prerequisite for maintaining valid software licensing records"],
     answer: 1,
     explain: 'Responders and auditors both depend on documentation that reflects reality. Stale diagrams slow down every future investigation.' },
 
   { id: 'd1-35', domain: 1, objective: '1.4', difficulty: 'Hard', topic: 'encryption-fundamentals',
     q: 'An organisation stores highly sensitive records that must remain confidential for 25 years. Which emerging risk should influence its cryptographic planning?',
-    options: ['Rainbow table attacks', 'Harvest-now-decrypt-later against non-quantum-safe algorithms', 'Buffer overflow in the cipher implementation', 'Certificate expiry'],
+    options: ["Rainbow table attacks against the stored password digests", 'Harvest-now-decrypt-later against non-quantum-safe algorithms', "A buffer overflow in the cipher implementation used by the storage layer", 'Certificate expiry'],
     answer: 1,
     explain: 'Adversaries can record encrypted traffic today and decrypt it once cryptanalytic or quantum capability improves. Long-lived secrets should follow the NIST post-quantum migration path.' },
 

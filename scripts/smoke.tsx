@@ -161,6 +161,31 @@ for (const mode of [...EXAM_MODES, ...domainModes()]) {
     )
   }
 }
+// distractor balance — a correct answer that is visibly longer than every
+// alternative is guessable regardless of shuffling (audit finding: 68.5% longest)
+console.log('Distractor balance')
+const singles = EXAM_BANK.filter((q) => !Array.isArray(q.answer))
+let ratioBreaches = 0
+let visiblyLongest = 0
+for (const q of singles) {
+  const correctLen = q.options[q.answer as number].length
+  const others = q.options.filter((_, i) => i !== q.answer).map((o) => o.length)
+  const avgOther = others.reduce((a, b) => a + b, 0) / others.length
+  if (correctLen / avgOther >= 2.5) {
+    ratioBreaches++
+    check(`${q.id} distractor length ratio under 2.5x`, false, (correctLen / avgOther).toFixed(1) + 'x')
+  }
+  const maxOther = Math.max(...others)
+  if (correctLen > maxOther && (correctLen - maxOther) / maxOther > 0.15) visiblyLongest++
+}
+check('no question exceeds a 2.5x length ratio', ratioBreaches === 0, `${ratioBreaches} questions`)
+const longestRate = visiblyLongest / singles.length
+check(
+  'picking the visibly longest option is no better than chance',
+  longestRate < 0.32,
+  `${(longestRate * 100).toFixed(1)}% (target under 32%, chance is 25%)`,
+)
+
 // option shuffling must preserve which option text is correct, and must not
 // leave the correct answer clustered in one position (audit finding: 81% at B)
 console.log('Option shuffling')

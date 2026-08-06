@@ -4,13 +4,18 @@ import type { ExamQuestion } from '../../types'
 export const EXAM_D3: ExamQuestion[] = [
   { id: 'd3-01', domain: 3, objective: '3.1', difficulty: 'Easy', topic: 'network-security-architecture',
     q: 'What is the primary purpose of a screened subnet?',
-    options: ['To accelerate internet access for staff', 'To host internet-facing services in an isolated zone so their compromise does not directly expose the internal network', 'To store encrypted backups', 'To provide wireless coverage for visitors'],
+    options: [
+      "To accelerate internet access for staff by caching frequently visited content",
+      "To isolate internet-facing services so their compromise does not expose the internal network",
+      "To provide a dedicated storage tier for encrypted backups and archive data",
+      "To supply wireless coverage for visitors without consuming corporate bandwidth",
+    ],
     answer: 1,
     explain: 'A screened subnet sits between two filtering layers, giving public services somewhere to live without granting them internal trust.' },
 
   { id: 'd3-02', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'network-security-architecture',
     q: 'Which traffic direction is most commonly under-monitored, and why does that matter?',
-    options: ['North-south, because it is encrypted', 'East-west, because lateral movement inside the network goes unobserved', 'Outbound only, because of NAT', 'Wireless only, because of client roaming'],
+    options: ['North-south, because it is encrypted', 'East-west, because lateral movement inside the network goes unobserved', 'Outbound only, because of NAT', "Wireless traffic only, because roaming clients change access points"],
     answer: 1,
     explain: 'Most inspection is deployed at the perimeter, yet attackers spend the majority of their time moving east-west where visibility is thinnest.' },
 
@@ -34,7 +39,12 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-06', domain: 3, objective: '4.5', difficulty: 'Medium', topic: 'secure-protocols-ports',
     q: 'What does DNSSEC provide?',
-    options: ['Encryption of DNS queries', 'Cryptographic authentication and integrity of DNS records so forged responses are rejected', 'Faster name resolution', 'Automatic blocking of malicious domains'],
+    options: [
+      "It encrypts DNS queries so an observer cannot see which names are resolved",
+      "It authenticates DNS records so forged responses are cryptographically rejected",
+      "It accelerates resolution by caching signed answers closer to the client",
+      "It blocks known malicious domains using a centrally maintained reputation feed",
+    ],
     answer: 1,
     explain: 'DNSSEC signs records to prove authenticity and integrity. It does not encrypt queries — DNS over HTTPS and DNS over TLS do that.' },
 
@@ -46,7 +56,7 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-08', domain: 3, objective: '4.5', difficulty: 'Medium', topic: 'secure-protocols-ports',
     q: 'A file must be transferred securely to a partner and only one firewall port may be opened. Which option best meets the requirement?',
-    options: ['FTP on 21', 'SFTP over SSH on 22', 'TFTP on 69', 'HTTP on 80'],
+    options: ['FTP on 21', 'SFTP over SSH on 22', "TFTP on port 69, using a pre-shared key for client authentication", 'HTTP on 80'],
     answer: 1,
     explain: 'SFTP runs inside a single SSH session, providing encryption and authentication without the multiple-port complexity of FTPS.' },
 
@@ -64,7 +74,7 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-11', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'cloud-security',
     q: 'What is the most common root cause of cloud data exposure incidents?',
-    options: ['Hypervisor escape by another tenant', 'Customer misconfiguration such as public storage or over-permissive IAM', 'Provider insider threat', 'Physical theft from the data centre'],
+    options: ["Hypervisor escape performed by another tenant on shared infrastructure", 'Customer misconfiguration such as public storage or over-permissive IAM', "A malicious insider employed by the cloud service provider", 'Physical theft from the data centre'],
     answer: 1,
     explain: 'Provider-side failures are rare. Publicly readable storage, wide-open security groups and excessive IAM permissions dominate real incidents.' },
 
@@ -76,7 +86,7 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-13', domain: 3, objective: '3.1', difficulty: 'Hard', topic: 'cloud-security',
     q: 'A long-lived cloud access key is committed to a public repository. Which control would have most effectively prevented the resulting compromise?',
-    options: ['A longer key value', 'Short-lived credentials issued through workload identity federation', 'Storing the key in a comment rather than a variable', 'Rotating the key annually'],
+    options: ["Generating a longer key value with greater entropy", 'Short-lived credentials issued through workload identity federation', "Storing the key in a source comment rather than an environment variable", 'Rotating the key annually'],
     answer: 1,
     explain: 'Eliminating static long-lived credentials removes the asset entirely. Secret scanning with push protection is the complementary control.' },
 
@@ -88,7 +98,12 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-15', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'virtualization-containers',
     q: 'What is the key security difference between containers and virtual machines?',
-    options: ['Containers are inherently more secure', 'Containers share the host kernel, so isolation is weaker than the hypervisor boundary between VMs', 'VMs cannot be patched', 'Containers cannot run untrusted workloads'],
+    options: [
+      "Containers are inherently more secure because their images are smaller",
+      "Containers share the host kernel, so isolation is weaker than the hypervisor boundary",
+      "Virtual machines cannot be patched once a snapshot has been taken",
+      "Containers are unable to execute untrusted workloads under any configuration",
+    ],
     answer: 1,
     explain: 'Namespace and cgroup isolation is enforced by the shared kernel, so a kernel flaw or a privileged container can break out more readily than a VM can escape a hypervisor.' },
 
@@ -100,37 +115,47 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-17', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'virtualization-containers',
     q: 'Which practice most reduces container supply chain risk?',
-    options: ['Running containers as root for compatibility', 'Scanning and signing images in CI and verifying signatures at admission', 'Always using the latest tag', 'Disabling network policies'],
+    options: ["Running every container as root so image compatibility is guaranteed", 'Scanning and signing images in CI and verifying signatures at admission', 'Always using the latest tag', 'Disabling network policies'],
     answer: 1,
     explain: 'Scanning finds vulnerable components and signature verification at admission ensures only approved images run. The latest tag makes deployments unreproducible.' },
 
   { id: 'd3-18', domain: 3, objective: '3.1', difficulty: 'Hard', topic: 'virtualization-containers',
     q: 'An attacker with code execution in a pod finds a mounted service account token and queries the Kubernetes API. Which control most directly limits this?',
-    options: ['Disabling automatic service account token mounting and enforcing least-privilege RBAC', 'Increasing pod memory limits', 'Using a larger container base image', 'Enabling verbose API logging only'],
-    answer: 0,
+    options: [
+      "Increase the memory and CPU limits assigned to each pod in the namespace",
+      "Disable automatic service account token mounting and enforce least-privilege RBAC",
+      "Replace the container base image with a larger distribution containing more tooling",
+      "Enable verbose API server logging without changing any access permissions",
+    ],
+    answer: 1,
     explain: 'Removing unnecessary tokens and constraining RBAC prevents a compromised workload from enumerating and manipulating cluster resources.' },
 
   { id: 'd3-19', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'iot-ics-ot',
     q: 'How does the priority order of security goals typically differ in operational technology compared with IT?',
-    options: ['It is identical', 'Safety and availability come first, with confidentiality last', 'Confidentiality is always first', 'Only integrity matters'],
+    options: [
+      "The priority order is identical to enterprise IT in every respect",
+      "Safety and availability come first, with confidentiality ranked last",
+      "Confidentiality is always first because process data is commercially sensitive",
+      "Only integrity matters, since sensors produce no confidential information",
+    ],
     answer: 1,
     explain: 'OT controls physical processes where downtime or unsafe states can injure people, so safety and availability outrank confidentiality.' },
 
   { id: 'd3-20', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'iot-ics-ot',
     q: 'A legacy PLC cannot be patched and uses a protocol without authentication. What is the most appropriate response?',
-    options: ['Accept the risk and take no further action', 'Apply compensating controls: strict segmentation, allow-listed communication and passive monitoring', 'Expose it to the internet for remote vendor support', 'Install endpoint antivirus on the PLC'],
+    options: ['Accept the risk and take no further action', 'Apply compensating controls: strict segmentation, allow-listed communication and passive monitoring', "Exposing it directly to the internet so the vendor can support it remotely", 'Install endpoint antivirus on the PLC'],
     answer: 1,
     explain: 'When the primary control is unavailable, compensating controls that limit reachability and provide detection are the correct answer.' },
 
   { id: 'd3-21', domain: 3, objective: '3.1', difficulty: 'Hard', topic: 'iot-ics-ot',
     q: 'What does a data diode provide in an OT architecture?',
-    options: ['Encrypted two-way tunnelling', 'Physically enforced one-way data flow, typically outward from OT to IT', 'Automatic patching of controllers', 'Load balancing between HMIs'],
+    options: ['Encrypted two-way tunnelling', 'Physically enforced one-way data flow, typically outward from OT to IT', "Automatic patch distribution to controllers during planned outages", 'Load balancing between HMIs'],
     answer: 1,
     explain: 'A unidirectional gateway physically permits data to travel in only one direction, so telemetry can leave without any inbound path existing at all.' },
 
   { id: 'd3-22', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'iot-ics-ot',
     q: 'Which characteristic makes IoT devices a persistent security problem at scale?',
-    options: ['They use too much bandwidth', 'Default credentials, long lifecycles and limited or absent patching', 'They cannot connect to wireless networks', 'They require physical cabling'],
+    options: ['They use too much bandwidth', 'Default credentials, long lifecycles and limited or absent patching', "An inability to connect to wireless networks without a wired fallback", 'They require physical cabling'],
     answer: 1,
     explain: 'Unchanged defaults on long-lived, rarely updated devices have fuelled large botnets. Segmentation and commissioning checklists are the practical controls.' },
 
@@ -154,7 +179,7 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-26', domain: 3, objective: '3.3', difficulty: 'Medium', topic: 'data-protection',
     q: 'Backup tapes are encrypted with AES-256. Which risk does this leave largely unaddressed?',
-    options: ['A tape stolen from a courier vehicle', 'An authorised administrator copying plaintext data before backup', 'A tape read on a different drive model', 'Tapes intercepted in transit'],
+    options: ['A tape stolen from a courier vehicle', 'An authorised administrator copying plaintext data before backup', "A tape being read on a different drive model with incompatible firmware", 'Tapes intercepted in transit'],
     answer: 1,
     explain: 'Encryption at rest protects against loss of physical media. It does nothing about an authorised insider with access to the plaintext, which is why DLP and monitoring are also required.' },
 
@@ -177,7 +202,12 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-30', domain: 3, objective: '3.4', difficulty: 'Medium', topic: 'resilience-high-availability',
     q: 'Why is RAID not a substitute for backups?',
-    options: ['RAID is slower than tape', 'RAID protects against disk failure but faithfully replicates deletion, corruption and ransomware encryption', 'RAID cannot be used with solid state drives', 'RAID requires cloud storage'],
+    options: [
+      "RAID rebuilds are slower than restoring the same data from tape media",
+      "RAID replicates deletion, corruption and ransomware encryption to every disk",
+      "RAID arrays cannot be constructed from solid state drives in production",
+      "RAID requires an off-site cloud storage target to function correctly",
+    ],
     answer: 1,
     explain: 'RAID provides availability against hardware failure only. Logical damage is written to every disk in the array immediately.' },
 
@@ -201,19 +231,29 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-34', domain: 3, objective: '4.6', difficulty: 'Medium', topic: 'identity-federation-sso',
     q: 'Which statement about OAuth 2.0 is correct?',
-    options: ['It is an authentication protocol that verifies user identity', 'It is an authorisation framework for delegating scoped access; OpenID Connect adds the identity layer', 'It replaces TLS for transport security', 'It is used only within Active Directory'],
+    options: ["It is an authentication protocol that verifies and asserts user identity", 'It is an authorisation framework for delegating scoped access; OpenID Connect adds the identity layer', 'It replaces TLS for transport security', 'It is used only within Active Directory'],
     answer: 1,
     explain: 'OAuth grants an application limited access to a resource. Using it alone for login is a common design error — OIDC exists specifically to add authentication.' },
 
   { id: 'd3-35', domain: 3, objective: '4.6', difficulty: 'Medium', topic: 'identity-federation-sso',
     q: 'In a SAML web SSO flow, what does the identity provider send to the service provider?',
-    options: ['The user password', 'A digitally signed assertion containing identity and attributes', 'A Kerberos service ticket', 'A certificate signing request'],
+    options: [
+      "The user password, forwarded so the application can verify it independently",
+      "A digitally signed assertion containing the identity and its attributes",
+      "A Kerberos service ticket issued by the domain key distribution centre",
+      "A certificate signing request for the application to forward to the CA",
+    ],
     answer: 1,
     explain: 'The signed assertion is the entire point — the service provider trusts the signature and never handles the credential itself.' },
 
   { id: 'd3-36', domain: 3, objective: '4.6', difficulty: 'Hard', topic: 'identity-federation-sso',
     q: 'A user resets their password after a phishing incident, yet the attacker retains mailbox access. What is the most likely explanation?',
-    options: ['The password reset silently failed', 'The attacker holds an OAuth refresh token from a consented application, which survives password changes', 'The mailbox was never encrypted', 'MFA was disabled for the tenant'],
+    options: [
+      "The password reset silently failed and never propagated to the directory",
+      "An OAuth refresh token from a consented application survives password changes",
+      "The mailbox was never encrypted at rest, so the data remained readable",
+      "Multifactor authentication was disabled tenant-wide during the incident",
+    ],
     answer: 1,
     explain: 'OAuth grants are independent of the password. Incident response must explicitly revoke tokens, sessions and application consents.' },
 
@@ -231,7 +271,12 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-39', domain: 3, objective: '4.6', difficulty: 'Hard', topic: 'identity-federation-sso',
     q: 'Why does centralising authentication through a single identity provider concentrate risk?',
-    options: ['It increases password reuse', 'Compromise of the IdP or its token-signing keys grants access to every federated application', 'It prevents the use of MFA', 'It requires all applications to share a database'],
+    options: [
+      "It increases password reuse because users maintain a single credential",
+      "Compromise of the IdP or its signing keys grants access to every federated application",
+      "It makes multifactor authentication technically impossible to enforce",
+      "It requires every application to share one common user database schema",
+    ],
     answer: 1,
     explain: 'The IdP becomes a tier-zero asset. Hardware-backed MFA for administrators and alerting on federation trust or signing certificate changes are essential.' },
 
@@ -243,7 +288,12 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-41', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'secure-development-lifecycle',
     q: 'What is the primary purpose of a software bill of materials?',
-    options: ['To license the software commercially', 'To inventory components and dependencies so vulnerable ones can be located quickly', 'To encrypt the source code', 'To measure code quality metrics'],
+    options: [
+      "To record the commercial licence terms attached to each dependency",
+      "To inventory components so vulnerable ones can be located quickly",
+      "To encrypt the source code before it is distributed to customers",
+      "To measure code quality metrics such as complexity and test coverage",
+    ],
     answer: 1,
     explain: 'An SBOM answers "do we use this component and where", which is the first question asked whenever a critical library flaw is announced.' },
 
@@ -255,7 +305,7 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-43', domain: 3, objective: '3.1', difficulty: 'Medium', topic: 'secure-development-lifecycle',
     q: 'Which practice most directly protects the integrity of a software release pipeline?',
-    options: ['Increasing build server RAM', 'Signed commits, protected branches, mandatory review and provenance attestation', 'Disabling build logs', 'Using the latest dependency versions automatically'],
+    options: ["Increasing the memory allocated to the build server pool", 'Signed commits, protected branches, mandatory review and provenance attestation', "Disabling build logs so pipeline configuration cannot be inspected", 'Using the latest dependency versions automatically'],
     answer: 1,
     explain: 'Pipeline compromise distributes malicious code signed and trusted. Controls must make unauthorised change to the build path detectable and difficult.' },
 
@@ -284,10 +334,15 @@ export const EXAM_D3: ExamQuestion[] = [
     explain: 'Active-active clustering with health checking removes the single point of failure and shifts traffic automatically rather than depending on human action.' },
 
   { id: 'd3-48', domain: 3, objective: '3.2', difficulty: 'Hard', topic: 'network-security-architecture',
-    q: 'For a security appliance protecting a safety-critical process, should the design fail open or fail closed, and why?',
-    options: ['Fail open, because availability always takes priority', 'Fail closed, because permitting unfiltered traffic during failure may be more dangerous than an outage', 'It makes no difference', 'Fail open, because it simplifies troubleshooting'],
+    q: 'A security appliance sits in front of a safety-critical industrial process. How should the fail-open versus fail-closed behaviour be determined?',
+    options: [
+      "Always fail open, because availability outranks every other consideration",
+      "The choice depends on whether unfiltered traffic or lost control is more dangerous, and must be a documented, risk-assessed decision",
+      "Always fail closed, because unfiltered traffic is the greater hazard",
+      "The behaviour cannot be configured and is determined solely by the vendor",
+    ],
     answer: 1,
-    explain: 'The correct choice depends on consequence. Where unfiltered traffic could cause harm, failing closed is safer; the decision must be deliberate and documented.' },
+    explain: 'There is no universally correct answer. In many OT contexts a safety system fails to a safe state, which can mean permitting traffic so operators retain visibility and control; in others, unfiltered traffic is the greater hazard. What matters for the exam and in practice is that the behaviour is chosen deliberately, justified by the consequence analysis, and documented.' },
 
   { id: 'd3-49', domain: 3, objective: '3.3', difficulty: 'Medium', topic: 'data-protection',
     q: 'Which classification label would typically apply to a published annual report?',
@@ -309,13 +364,18 @@ export const EXAM_D3: ExamQuestion[] = [
 
   { id: 'd3-52', domain: 3, objective: '3.4', difficulty: 'Medium', topic: 'resilience-high-availability',
     q: 'Which power protection provides continuous availability during an extended utility outage?',
-    options: ['Surge protector only', 'UPS only', 'UPS bridging to a generator', 'Additional power distribution units'],
+    options: ["A surge protector on the incoming supply, with no battery backup", 'UPS only', "A generator alone, started manually when the utility supply is lost", 'Additional power distribution units'],
     answer: 2,
     explain: 'A UPS covers seconds to minutes. A generator sustains extended outages, with the UPS bridging the gap while the generator starts.' },
 
   { id: 'd3-53', domain: 3, objective: '3.1', difficulty: 'Hard', topic: 'cloud-security',
     q: 'Which control most effectively prevents cloud misconfiguration reaching production, rather than merely detecting it afterwards?',
-    options: ['Weekly manual console review', 'Policy-as-code guardrails enforced in CI and organisation-level service control policies', 'Quarterly penetration testing', 'Longer log retention'],
+    options: [
+      "A weekly manual review of the cloud console by the platform team",
+      "Policy-as-code guardrails in CI plus organisation-level service control policies",
+      "A quarterly external penetration test covering the production environment",
+      "Extending audit log retention from ninety days to twelve months",
+    ],
     answer: 1,
     explain: 'Detection always arrives after exposure. Preventive guardrails make the insecure configuration impossible to deploy in the first place.' },
 

@@ -4,7 +4,12 @@ import type { ExamQuestion } from '../../types'
 export const EXAM_D4: ExamQuestion[] = [
   { id: 'd4-01', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'incident-response',
     q: 'A server is suspected of compromise. What is the recommended immediate containment action?',
-    options: ['Power the server off immediately', 'Isolate it from the network while leaving it running, then capture volatile memory', 'Reinstall the operating system', 'Delete the suspicious files'],
+    options: [
+      "Power the server off immediately to halt any running malicious process",
+      "Isolate it from the network while it stays running, then capture memory",
+      "Reinstall the operating system from the standard build image straight away",
+      "Delete the suspicious files and run a full antivirus scan of the disk",
+    ],
     answer: 1,
     explain: 'Powering off destroys memory-resident evidence including running processes, network connections and encryption keys. Network isolation stops the damage while preserving that evidence.' },
 
@@ -16,13 +21,18 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-03', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'incident-response',
     q: 'What is the purpose of a blameless post-incident review?',
-    options: ['To identify who should be disciplined', 'To surface honest information and produce systemic improvements', 'To satisfy the insurer only', 'To close the ticket more quickly'],
+    options: ["To establish which individual should be held accountable and disciplined", 'To surface honest information and produce systemic improvements', 'To satisfy the insurer only', 'To close the ticket more quickly'],
     answer: 1,
     explain: 'Blame suppresses information. A blameless review gets the truth, which is the only basis for fixing the process and system weaknesses involved.' },
 
   { id: 'd4-04', domain: 4, objective: '4.8', difficulty: 'Hard', topic: 'incident-response',
     q: 'A team rebuilds one compromised host and closes the incident, but the attacker returns within days. What went wrong?',
-    options: ['The rebuild used the wrong image', 'Eradication began before the intrusion was fully scoped, leaving other footholds intact', 'The backup was too old', 'The firewall was not restarted'],
+    options: [
+      "The rebuild used an outdated image containing the original vulnerability",
+      "Eradication began before the intrusion was scoped, leaving other footholds",
+      "The restored backup predated the intrusion by an insufficient margin",
+      "The perimeter firewall was not restarted after the rules were updated",
+    ],
     answer: 1,
     explain: 'Piecemeal eradication tips off the attacker while leaving persistence elsewhere. Scope fully, then eradicate everything simultaneously and reset credentials comprehensively.' },
 
@@ -34,25 +44,35 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-06', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'incident-response',
     q: 'Under GDPR, within what period must a controller notify the supervisory authority of a personal data breach?',
-    options: ['24 hours', '72 hours of becoming aware', '30 days', 'Only if individuals suffer demonstrable harm'],
+    options: ['24 hours', '72 hours of becoming aware', "Thirty days from the point at which the breach was first identified", 'Only if individuals suffer demonstrable harm'],
     answer: 1,
     explain: 'Notification is required without undue delay and, where feasible, within 72 hours of becoming aware — which is why legal escalation must be inside the response plan.' },
 
   { id: 'd4-07', domain: 4, objective: '4.9', difficulty: 'Medium', topic: 'siem-log-analysis',
     q: 'Why is accurate time synchronisation critical for a SIEM?',
-    options: ['It reduces storage requirements', 'Without consistent timestamps, events from different sources cannot be reliably correlated or sequenced', 'It encrypts the log data', 'It improves compression ratios'],
+    options: [
+      "It reduces the storage consumed by duplicate event records",
+      "Without comparable timestamps, events cannot be correlated or sequenced",
+      "It encrypts log data in transit between the agent and the collector",
+      "It improves the compression ratio achieved on archived log volumes",
+    ],
     answer: 1,
     explain: 'Correlation and timeline reconstruction depend entirely on comparable timestamps. NTP is a prerequisite for meaningful analysis.' },
 
   { id: 'd4-08', domain: 4, objective: '4.9', difficulty: 'Medium', topic: 'siem-log-analysis',
     q: 'A Windows security log shows event ID 1102, audit log cleared, at 03:00 on a file server. How should this be treated?',
-    options: ['Routine maintenance', 'A high-fidelity indicator of possible anti-forensic activity requiring investigation', 'A disk space warning', 'A failed backup job'],
+    options: [
+      "Routine maintenance performed by the platform operations team",
+      "A possible anti-forensic action that requires prompt investigation",
+      "A disk space warning generated when the log file reaches capacity",
+      "A failed backup job that could not read the open event log handle",
+    ],
     answer: 1,
     explain: 'Administrators rarely clear security logs. It is a well-known anti-forensic technique and should always be investigated.' },
 
   { id: 'd4-09', domain: 4, objective: '4.9', difficulty: 'Medium', topic: 'siem-log-analysis',
     q: 'What is the main risk of a SIEM producing thousands of low-precision alerts daily?',
-    options: ['Increased licensing cost only', 'Alert fatigue causing genuine incidents to be dismissed', 'Reduced network throughput', 'Loss of log encryption'],
+    options: ["An increase in licensing cost driven by the volume of events ingested", 'Alert fatigue causing genuine incidents to be dismissed', 'Reduced network throughput', 'Loss of log encryption'],
     answer: 1,
     explain: 'Human attention is finite. Poor alert precision statistically guarantees that real detections will eventually be closed without investigation.' },
 
@@ -76,25 +96,40 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-13', domain: 4, objective: '4.4', difficulty: 'Medium', topic: 'soc-monitoring',
     q: 'What best describes threat hunting?',
-    options: ['Responding to alerts as they arrive', 'Proactive, hypothesis-driven searching for malicious activity that existing detections have not caught', 'Running scheduled vulnerability scans', 'Reviewing firewall change requests'],
+    options: [
+      "Responding to alerts in the queue in order of severity as they arrive",
+      "Proactive, hypothesis-driven searching for activity no detection has caught",
+      "Running authenticated vulnerability scans against the server estate",
+      "Reviewing firewall change requests submitted through the ticket system",
+    ],
     answer: 1,
     explain: 'Hunting assumes compromise and searches for evidence, generating new detection rules whenever something is found.' },
 
   { id: 'd4-14', domain: 4, objective: '4.4', difficulty: 'Medium', topic: 'soc-monitoring',
     q: 'A SOC finds 95 percent of its alerts are false positives. What is the most appropriate response?',
-    options: ['Hire more tier 1 analysts', 'Tune or retire low-precision rules and enrich alerts with asset and identity context', 'Disable the SIEM temporarily', 'Increase log retention'],
+    options: [
+      "Recruit additional tier 1 analysts to work through the alert backlog",
+      "Tune or retire low-precision rules and enrich alerts with asset context",
+      "Disable the SIEM until the underlying detection content is rewritten",
+      "Increase log retention so more historical context is available",
+    ],
     answer: 1,
     explain: 'Adding analysts scales the noise. Improving alert precision and supplying context addresses the root cause.' },
 
   { id: 'd4-15', domain: 4, objective: '4.4', difficulty: 'Hard', topic: 'soc-monitoring',
     q: 'Why do sophisticated attackers time major actions for weekends and public holidays?',
-    options: ['Network bandwidth is higher', 'Monitoring coverage and response capacity are typically reduced', 'Logging is disabled at weekends', 'Firewalls fail open on holidays'],
+    options: ['Network bandwidth is higher', 'Monitoring coverage and response capacity are typically reduced', "Logging is disabled at weekends to reduce storage consumption", 'Firewalls fail open on holidays'],
     answer: 1,
     explain: 'Reduced staffing extends dwell time before detection. Genuine out-of-hours coverage, in-house or through a managed provider, closes the gap.' },
 
   { id: 'd4-16', domain: 4, objective: '4.5', difficulty: 'Easy', topic: 'firewalls',
     q: 'What is the difference between a stateless and a stateful firewall?',
-    options: ['Stateless firewalls cannot filter by port', 'Stateful firewalls track connection state so return traffic for permitted sessions is automatically allowed', 'Stateful firewalls operate only at layer 7', 'There is no functional difference'],
+    options: [
+      "Stateless firewalls are unable to filter traffic by port number",
+      "Stateful firewalls track connections so return traffic is allowed automatically",
+      "Stateful firewalls operate exclusively at the application layer",
+      "There is no functional difference beyond the vendor terminology used",
+    ],
     answer: 1,
     explain: 'A stateful firewall maintains a connection table. A stateless filter evaluates each packet independently and needs explicit rules for return traffic.' },
 
@@ -106,7 +141,12 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-18', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'firewalls',
     q: 'Why does rule order matter in a firewall policy?',
-    options: ['Rules are evaluated in random order', 'The first matching rule is applied, so a broad permissive rule placed early overrides later restrictive rules', 'Only the final rule is evaluated', 'Order affects logging verbosity only'],
+    options: [
+      "Rules are evaluated in a randomised order to prevent predictability",
+      "The first matching rule wins, so a broad permit early overrides later denies",
+      "Only the final rule in the policy is ever evaluated for a packet",
+      "Rule order affects logging verbosity but not the filtering decision",
+    ],
     answer: 1,
     explain: 'First-match-wins evaluation means a misplaced any/any rule silently negates everything beneath it.' },
 
@@ -124,7 +164,7 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-21', domain: 4, objective: '4.5', difficulty: 'Easy', topic: 'ids-ips-ndr',
     q: 'What is the fundamental difference between an IDS and an IPS?',
-    options: ['An IDS works at layer 2 and an IPS at layer 3', 'An IDS detects and alerts passively; an IPS sits inline and can block traffic', 'An IDS is always host-based', 'An IPS cannot use signatures'],
+    options: ["An IDS operates at layer 2 whereas an IPS operates at layer 3", 'An IDS detects and alerts passively; an IPS sits inline and can block traffic', 'An IDS is always host-based', 'An IPS cannot use signatures'],
     answer: 1,
     explain: 'Placement and capability differ: the IDS observes a copy of traffic, while the IPS sits in the path and can drop packets — with the corresponding risk of blocking legitimate traffic.' },
 
@@ -142,31 +182,46 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-24', domain: 4, objective: '4.5', difficulty: 'Hard', topic: 'ids-ips-ndr',
     q: 'With most traffic now encrypted, which approach best preserves network detection capability without decryption?',
-    options: ['Disabling network monitoring entirely', 'Analysing metadata such as connection frequency, TLS fingerprints and packet size distribution', 'Blocking all TLS 1.3 connections', 'Relying solely on antivirus signatures'],
+    options: [
+      "Disabling network monitoring and relying on endpoint telemetry alone",
+      "Analysing metadata such as beacon periodicity, TLS fingerprints and packet size",
+      "Blocking every TLS 1.3 connection so traffic can be inspected in the clear",
+      "Depending solely on antivirus signatures deployed at the perimeter",
+    ],
     answer: 1,
     explain: 'You do not need to read the traffic to recognise the behaviour. Beacon periodicity and client fingerprinting remain visible without inspecting payloads.' },
 
   { id: 'd4-25', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'ids-ips-ndr',
     q: 'Which deployment method allows an IDS to observe traffic without being in the data path?',
-    options: ['Inline bridge mode', 'A network TAP or switch SPAN port', 'Proxy ARP', 'Port forwarding'],
+    options: ["Inline bridge mode, with the sensor placed directly in the traffic path", 'A network TAP or switch SPAN port', 'Proxy ARP', 'Port forwarding'],
     answer: 1,
     explain: 'A TAP or SPAN port delivers a copy of traffic. The sensor cannot block, but it also cannot cause an outage.' },
 
   { id: 'd4-26', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'edr-xdr',
     q: 'Why is EDR more effective than signature-based antivirus against fileless attacks?',
-    options: ['It scans files more frequently', 'It records and analyses behaviour and process relationships rather than matching known file content', 'It uses a larger signature database', 'It operates entirely in the cloud'],
+    options: [
+      "It scans the filesystem far more frequently than traditional antivirus",
+      "It analyses behaviour and process lineage rather than matching file content",
+      "It maintains a considerably larger and more current signature database",
+      "It performs all analysis in the cloud, so the endpoint is never loaded",
+    ],
     answer: 1,
     explain: 'Fileless techniques write nothing to disk to scan. Behavioural telemetry — what ran, spawned by what, doing what — still reveals them.' },
 
   { id: 'd4-27', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'edr-xdr',
     q: 'What does XDR add compared with EDR?',
-    options: ['Faster disk scanning', 'Correlation of telemetry across endpoint, identity, email, network and cloud in one platform', 'Hardware-level encryption', 'Automatic operating system patching'],
+    options: [
+      "Substantially faster on-demand scanning of local disk volumes",
+      "Correlation across endpoint, identity, email, network and cloud telemetry",
+      "Hardware-level encryption of data at rest on the protected endpoint",
+      "Automatic operating system patching without a maintenance window",
+    ],
     answer: 1,
     explain: 'Extended detection and response widens the data set so a single incident is visible across every domain it touches.' },
 
   { id: 'd4-28', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'edr-xdr',
     q: 'An EDR agent stops reporting to the management console on a critical server. How should this be treated?',
-    options: ['Ignore it, the host is probably powered off', 'Investigate promptly, as agent silence can indicate deliberate impairment of defences', 'Reinstall the agent without investigating', 'Suppress alerting for that host'],
+    options: ["Ignore it, because the host has most likely been powered down for the night", 'Investigate promptly, as agent silence can indicate deliberate impairment of defences', 'Reinstall the agent without investigating', 'Suppress alerting for that host'],
     answer: 1,
     explain: 'Disabling or blinding security tooling is a recognised attacker technique. Unexplained loss of telemetry is a security event, not a maintenance task.' },
 { id: 'd4-29', domain: 4, objective: '4.5', difficulty: 'Hard', topic: 'edr-xdr',
@@ -183,19 +238,29 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-31', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'digital-forensics',
     q: 'What is the purpose of chain of custody documentation?',
-    options: ['To encrypt the evidence at rest', 'To record every person who handled the evidence and when, demonstrating integrity of handling', 'To compress evidence files', 'To identify the attacker'],
+    options: [
+      "To encrypt the acquired evidence so it cannot be read in transit",
+      "To record who handled the evidence and when, demonstrating its integrity",
+      "To compress evidence files so they consume less archival storage",
+      "To identify the individual responsible for the intrusion under review",
+    ],
     answer: 1,
     explain: 'Chain of custody establishes that evidence was not tampered with or substituted, which is essential for admissibility and credibility.' },
 
   { id: 'd4-32', domain: 4, objective: '4.8', difficulty: 'Easy', topic: 'digital-forensics',
     q: 'Why is a write blocker used during forensic acquisition?',
-    options: ['To speed up copying', 'To prevent any modification of the original media during imaging', 'To encrypt the resulting image', 'To compress the image file'],
+    options: [
+      "To reduce the time required to copy a large disk image",
+      "To guarantee the original media is not modified during acquisition",
+      "To encrypt the resulting image before it leaves the examination room",
+      "To compress the image so it fits on standard evidence media",
+    ],
     answer: 1,
     explain: 'Any write to the source alters the evidence. A write blocker enforces read-only access at hardware or driver level.' },
 
   { id: 'd4-33', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'digital-forensics',
     q: 'What is the purpose of a legal hold?',
-    options: ['To encrypt sensitive files', 'To suspend routine data destruction once litigation or investigation is anticipated', 'To restrict physical access to a building', 'To delay patching during an incident'],
+    options: ["To encrypt sensitive files so they cannot be read if disclosed", 'To suspend routine data destruction once litigation or investigation is anticipated', "To restrict physical access to the building housing the affected systems", 'To delay patching during an incident'],
     answer: 1,
     explain: 'A legal hold preserves potentially relevant records. Continuing normal deletion after a hold is triggered can constitute spoliation.' },
 
@@ -213,7 +278,12 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-36', domain: 4, objective: '4.1', difficulty: 'Easy', topic: 'hardening-baselines',
     q: 'What does the principle of least functionality mean?',
-    options: ['Give users the minimum permissions required', 'Configure systems to provide only the services, ports and software required for their purpose', 'Buy the smallest possible hardware', 'Limit available bandwidth per user'],
+    options: [
+      "Granting each user only the permissions their role genuinely requires",
+      "Configuring systems to provide only the services and software required",
+      "Procuring the smallest hardware specification the workload will tolerate",
+      "Limiting the bandwidth available to each user on the corporate network",
+    ],
     answer: 1,
     explain: 'Least functionality applies to the system, removing unnecessary capability. Least privilege is the related principle applied to accounts.' },
 
@@ -231,13 +301,13 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-39', domain: 4, objective: '4.1', difficulty: 'Medium', topic: 'hardening-baselines',
     q: 'Which is the most appropriate approach for an actively exploited critical vulnerability on an internet-facing system?',
-    options: ['Wait for the quarterly maintenance window', 'Use the emergency change path to patch immediately, then hunt for prior compromise', 'Patch all systems without any testing', 'Document it as accepted risk'],
+    options: ["Wait for the next quarterly maintenance window and patch in sequence", 'Use the emergency change path to patch immediately, then hunt for prior compromise', 'Patch all systems without any testing', "Record it as accepted risk and review it at the next cycle"],
     answer: 1,
     explain: 'Active exploitation justifies an emergency change. Patching alone is insufficient because an already compromised system stays compromised.' },
 
   { id: 'd4-40', domain: 4, objective: '4.1', difficulty: 'Medium', topic: 'hardening-baselines',
     q: 'Which weakness is still among the most exploited on internet-connected devices and costs nothing to fix?',
-    options: ['Insufficient RAM', 'Unchanged default credentials', 'Lack of RAID', 'Slow processors'],
+    options: ["Insufficient memory and processing capacity for the workload deployed", 'Unchanged default credentials', 'Lack of RAID', 'Slow processors'],
     answer: 1,
     explain: 'Entire botnets have been built by trying a short list of manufacturer defaults. Commissioning checklists are the practical fix.' },
 
@@ -249,37 +319,67 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-42', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'email-security',
     q: 'An organisation has SPF and DKIM configured but no DMARC record. What is the main consequence?',
-    options: ['Email cannot be delivered at all', 'No published policy tells receivers how to handle failures, and there is no aggregate reporting', 'DKIM signatures become invalid', 'All inbound mail is rejected'],
+    options: [
+      "Outbound mail cannot be delivered to any recipient domain at all",
+      "No policy tells receivers how to handle failures and no reporting is produced",
+      "Existing DKIM signatures become invalid and are stripped by receivers",
+      "All inbound mail is rejected until a policy record is published",
+    ],
     answer: 1,
     explain: 'Without DMARC there is no enforcement instruction and no alignment requirement, so spoofed messages are frequently still delivered.' },
 
   { id: 'd4-43', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'email-security',
     q: 'What is the recommended initial DMARC policy when deploying for the first time?',
-    options: ['p=reject immediately', 'p=none with reporting enabled, to identify all legitimate senders', 'No policy at all', 'p=quarantine with reporting disabled'],
+    options: [
+      "Publish p=reject immediately so spoofing is blocked from day one",
+      "Publish p=none with reporting to identify every legitimate sender first",
+      "Publish no policy and rely on SPF and DKIM enforcement alone",
+      "Publish p=quarantine with reporting addresses deliberately omitted",
+    ],
     answer: 1,
     explain: 'Starting at p=none with aggregate reporting reveals every legitimate sender so they can be authorised before enforcement breaks business mail.' },
 
   { id: 'd4-44', domain: 4, objective: '4.5', difficulty: 'Hard', topic: 'email-security',
     q: 'After DMARC enforcement blocks exact-domain spoofing, attackers register a lookalike domain with valid SPF, DKIM and DMARC of its own. Which control best addresses this?',
-    options: ['Stricter DMARC policy on your own domain', 'Lookalike domain monitoring, external sender banners and display name impersonation detection', 'Disabling DKIM', 'Blocking all inbound email'],
+    options: [
+      "Tighten the DMARC policy on your own domain from quarantine to reject",
+      "Lookalike domain monitoring, external sender banners and impersonation detection",
+      "Remove DKIM signing so recipients stop trusting authentication results",
+      "Block all inbound mail from domains registered in the last twelve months",
+    ],
     answer: 1,
     explain: 'Authentication proves the sender controls their own domain, not that they are trustworthy. Impersonation detection and user-facing signals are required.' },
 
   { id: 'd4-45', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'email-security',
     q: 'Why should domains that never send email still publish SPF and DMARC records?',
-    options: ['To improve search engine ranking', 'To prevent attackers spoofing those domains, which otherwise have no protection', 'To reduce DNS query volume', 'It is required for domain renewal'],
+    options: [
+      "Publishing the records marginally improves search engine ranking",
+      "Unprotected domains can be spoofed freely, including brand-protection domains",
+      "The records reduce DNS query volume against the authoritative servers",
+      "Registrars require the records before a domain renewal is processed",
+    ],
     answer: 1,
     explain: 'Parked and brand-protection domains are ideal spoofing targets. A null SPF and a reject DMARC policy close the gap in minutes.' },
 
   { id: 'd4-46', domain: 4, objective: '4.7', difficulty: 'Medium', topic: 'automation-soar',
     q: 'What is the difference between automation and orchestration?',
-    options: ['They are the same', 'Automation executes a single task without a human; orchestration coordinates multiple automated tasks across systems into a workflow', 'Orchestration applies only to networks', 'Automation requires a SIEM'],
+    options: [
+      "The two terms describe the same capability at different scales",
+      "Automation performs one task unattended; orchestration coordinates many across systems",
+      "Orchestration applies only to network devices, automation only to servers",
+      "Automation requires a SIEM whereas orchestration operates independently",
+    ],
     answer: 1,
     explain: 'Automation is the individual action. Orchestration is the conductor arranging many actions across tools into an end-to-end process.' },
 
   { id: 'd4-47', domain: 4, objective: '4.7', difficulty: 'Medium', topic: 'automation-soar',
     q: 'Which is a genuine risk of extensive security automation?',
-    options: ['It always increases headcount requirements', 'A poorly tuned playbook can take disruptive action at scale, and unmaintained playbooks become technical debt', 'It prevents logging', 'It removes the need for detection rules'],
+    options: [
+      "It reliably increases the number of analysts a SOC needs to employ",
+      "A poorly tuned playbook can act disruptively at scale and become debt",
+      "It prevents the underlying tools from writing their own audit logs",
+      "It removes the need to maintain any detection rules in the SIEM",
+    ],
     answer: 1,
     explain: 'Automation multiplies both correct and incorrect decisions. Playbooks need owners, testing and review exactly like production code.' },
 
@@ -291,13 +391,18 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-49', domain: 4, objective: '4.7', difficulty: 'Hard', topic: 'automation-soar',
     q: 'Why should a SOAR platform be treated as a tier-zero asset?',
-    options: ['It consumes significant bandwidth', 'It holds privileged API credentials for many systems, so its compromise grants broad access', 'It stores the largest volume of logs', 'It requires the most licensing'],
+    options: [
+      "It consumes considerable network bandwidth during playbook execution",
+      "It stores privileged API credentials for many systems in a single place",
+      "It retains the largest volume of raw log data in the environment",
+      "It carries the highest per-seat licensing cost of any security tool",
+    ],
     answer: 1,
     explain: 'Orchestration platforms concentrate integration secrets. Vaulted short-lived credentials, restricted administration and playbook change auditing are essential.' },
 
   { id: 'd4-50', domain: 4, objective: '4.7', difficulty: 'Medium', topic: 'automation-soar',
     q: 'When introducing security automation, which category should generally be automated first?',
-    options: ['Irreversible containment actions such as disabling accounts', 'Alert enrichment, because it is safe and immediately valuable', 'Firewall rule deletion', 'Backup destruction'],
+    options: ['Irreversible containment actions such as disabling accounts', 'Alert enrichment, because it is safe and immediately valuable', "Automated deletion of firewall rules that have not matched recently", "Automated destruction of backup sets older than the retention period"],
     answer: 1,
     explain: 'Enrichment cannot cause harm and saves the most analyst time. Containment automation should follow only where detection confidence is genuinely high.' },
 
@@ -333,12 +438,12 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-56', domain: 4, objective: '4.2', difficulty: 'Medium', topic: 'hardening-baselines',
     q: 'Which MDM capability most directly protects data on a lost mobile device?',
-    options: ['Application catalogue', 'Remote wipe combined with enforced device encryption', 'Push notification management', 'Battery usage reporting'],
+    options: ['Application catalogue', 'Remote wipe combined with enforced device encryption', "Push notification management and application catalogue distribution", 'Battery usage reporting'],
     answer: 1,
     explain: 'Encryption protects the data at rest and remote wipe removes it if the device cannot be recovered. Both should be mandatory policy.' },
 { id: 'd4-57', domain: 4, objective: '4.6', difficulty: 'Medium', topic: 'authorization-access-control-models',
     q: 'Which practice ensures a user who changes department does not accumulate permissions from both roles?',
-    options: ['Annual password rotation', 'Periodic access recertification with removal by default', 'Increasing session timeout', 'Enabling single sign-on'],
+    options: ['Annual password rotation', 'Periodic access recertification with removal by default', "Increasing the session timeout so users re-authenticate less often", 'Enabling single sign-on'],
     answer: 1,
     explain: 'Privilege creep is the most common access audit finding. Recertification forces managers to reconfirm each entitlement, defaulting to removal.' },
 
@@ -350,7 +455,12 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-59', domain: 4, objective: '4.6', difficulty: 'Medium', topic: 'identity-federation-sso',
     q: 'A privileged access management platform brokers and records every administrative session. Which property does this most improve?',
-    options: ['Network throughput', 'Non-repudiation and accountability for privileged actions', 'Backup speed', 'Certificate validity'],
+    options: [
+      "Throughput between the administrative network and the server estate",
+      "Non-repudiation and accountability for individual privileged actions",
+      "The speed at which nightly backup jobs complete across the estate",
+      "The validity period of certificates issued to administrative users",
+    ],
     answer: 1,
     explain: 'Brokered, recorded, individually attributed sessions replace shared credentials, restoring the ability to determine who did what.' },
 
@@ -362,7 +472,12 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-61', domain: 4, objective: '4.9', difficulty: 'Medium', topic: 'siem-log-analysis',
     q: 'What does normalisation achieve in a SIEM pipeline?',
-    options: ['It compresses log storage', 'It maps differing vendor formats onto a common schema so one rule works across sources', 'It encrypts logs at rest', 'It deletes duplicate events'],
+    options: [
+      "It compresses stored events to reduce the cost of long retention",
+      "It maps differing vendor formats onto one schema so rules work everywhere",
+      "It encrypts log records at rest within the SIEM storage tier",
+      "It removes duplicate events generated by overlapping collectors",
+    ],
     answer: 1,
     explain: 'Without normalisation every detection rule would need rewriting per vendor. A common schema makes correlation and rule reuse possible.' },
 
@@ -380,13 +495,18 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-64', domain: 4, objective: '4.8', difficulty: 'Hard', topic: 'incident-response',
     q: 'During recovery from a domain-wide compromise, which order of restoration is most appropriate?',
-    options: ['Application servers, then identity, then DNS', 'Identity and DNS infrastructure from clean media first, then dependent systems', 'All systems simultaneously', 'End-user workstations first'],
+    options: [
+      "Application servers first, then identity services, then name resolution",
+      "Identity and DNS from clean media first, then the systems that depend on them",
+      "Every system simultaneously to minimise total time to recovery",
+      "End-user workstations first so staff can resume work immediately",
+    ],
     answer: 1,
     explain: 'Everything authenticates against identity and resolves through DNS. Restoring dependent services first produces a cascade of failures.' },
 
   { id: 'd4-65', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'incident-response',
     q: 'Which document defines who must be contacted, in what order, during a security incident?',
-    options: ['Acceptable use policy', 'Communication plan and escalation matrix', 'Change request form', 'Data retention schedule'],
+    options: ['Acceptable use policy', 'Communication plan and escalation matrix', 'Change request form', "The data retention schedule governing how long records are held"],
     answer: 1,
     explain: 'A tested communication plan with an escalation matrix prevents the delay and confusion that otherwise dominate the first hour.' },
 
@@ -398,7 +518,7 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-67', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'firewalls',
     q: 'Which device distributes inbound connections across multiple backend servers and removes failed nodes from rotation?',
-    options: ['Reverse proxy load balancer', 'Forward proxy', 'IDS sensor', 'DHCP relay'],
+    options: ['Reverse proxy load balancer', "A forward proxy that terminates outbound client connections", 'IDS sensor', 'DHCP relay'],
     answer: 0,
     explain: 'A load balancer with health checks provides availability and can also terminate TLS and apply WAF policy at the edge.' },
 
@@ -410,7 +530,12 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-69', domain: 4, objective: '4.4', difficulty: 'Medium', topic: 'soc-monitoring',
     q: 'What is a honeyfile or canary token used for?',
-    options: ['Speeding up file transfers', 'Generating an alert when a decoy file or credential is accessed or used', 'Compressing archives', 'Encrypting backups'],
+    options: [
+      "It accelerates large file transfers between branch office sites",
+      "It raises an alert when a decoy file or credential is accessed or used",
+      "It compresses archives so they consume less space on the file server",
+      "It encrypts backup sets before they are written to removable media",
+    ],
     answer: 1,
     explain: 'Nobody has a legitimate reason to open the decoy, so access is a strong signal of unauthorised discovery activity.' },
 
@@ -428,37 +553,42 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-72', domain: 4, objective: '4.4', difficulty: 'Hard', topic: 'siem-log-analysis',
     q: 'Which combination of events over a short window most strongly suggests an active intrusion rather than routine activity?',
-    options: ['A software update, a reboot and a successful login', 'A new service account created, security logging stopped and outbound traffic to a new destination', 'High CPU, a scheduled backup and a DNS query', 'A password change, a VPN connection and an email sent'],
+    options: ['A software update, a reboot and a successful login', 'A new service account created, security logging stopped and outbound traffic to a new destination', 'High CPU, a scheduled backup and a DNS query', "A password change, a VPN connection and an email sent to a colleague"],
     answer: 1,
     explain: 'Individually unremarkable events become an intrusion narrative when correlated: persistence, defence evasion and command and control in sequence.' },
 
   { id: 'd4-73', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'incident-response',
     q: 'Which containment approach is described as long-term containment?',
-    options: ['Unplugging the network cable', 'Rebuilding affected systems into a clean, segmented environment while the investigation continues', 'Killing a malicious process', 'Blocking a single IP address'],
+    options: [
+      "Physically unplugging the network cable from the affected machine",
+      "Rebuilding affected systems into a clean segment while investigation continues",
+      "Terminating the malicious process identified by the endpoint agent",
+      "Blocking a single command and control IP address at the perimeter",
+    ],
     answer: 1,
     explain: 'Short-term containment stops immediate damage. Long-term containment establishes a sustainable safe state until full eradication is possible.' },
 
   { id: 'd4-74', domain: 4, objective: '4.9', difficulty: 'Medium', topic: 'siem-log-analysis',
     q: 'Which consideration most commonly limits SIEM log retention periods?',
-    options: ['Regulatory prohibition on storing logs', 'Storage and licensing cost balanced against investigative reach', 'Lack of available log sources', 'Encryption overhead'],
+    options: ["A regulatory prohibition on retaining log data beyond a fixed period", 'Storage and licensing cost balanced against investigative reach', 'Lack of available log sources', "The processing overhead of encrypting log data at rest"],
     answer: 1,
     explain: 'Intrusions are frequently discovered months after they begin, so short retention destroys investigative capability. Cost is the usual constraint.' },
 
   { id: 'd4-75', domain: 4, objective: '4.5', difficulty: 'Medium', topic: 'edr-xdr',
     q: 'Which EDR response action is generally preferred for containing a compromised workstation?',
-    options: ['Immediate hard shutdown', 'Network isolation with the agent still reporting', 'Deleting all user files', 'Disabling the EDR agent'],
+    options: ["An immediate hard shutdown to terminate all malicious processes", 'Network isolation with the agent still reporting', 'Deleting all user files', 'Disabling the EDR agent'],
     answer: 1,
     explain: 'Isolation stops lateral movement and exfiltration while preserving volatile evidence and allowing investigators continued remote access.' },
 
   { id: 'd4-76', domain: 4, objective: '4.4', difficulty: 'Medium', topic: 'soc-monitoring',
     q: 'Which metric best demonstrates whether a security programme is improving over time?',
-    options: ['Number of alerts generated', 'Trend in mean time to detect and mean time to respond', 'Number of tools deployed', 'Volume of logs ingested'],
+    options: ["The total number of alerts generated by the detection platform", 'Trend in mean time to detect and mean time to respond', 'Number of tools deployed', 'Volume of logs ingested'],
     answer: 1,
     explain: 'Alert and log volume measure activity, not effectiveness. Detection and response speed measure outcomes that matter to the business.' },
 
   { id: 'd4-77', domain: 4, objective: '4.1', difficulty: 'Medium', topic: 'hardening-baselines',
     q: 'Which technology ensures that only trusted, signed code executes during system startup?',
-    options: ['Secure Boot with a hardware root of trust', 'Disk defragmentation', 'BIOS password only', 'Screen lock policy'],
+    options: ['Secure Boot with a hardware root of trust', "Scheduled disk defragmentation performed before each system restart", 'BIOS password only', 'Screen lock policy'],
     answer: 0,
     explain: 'Secure Boot validates each stage of the boot chain against trusted signatures, defending against bootkits that would otherwise load before the OS.' },
 
@@ -470,19 +600,29 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-79', domain: 4, objective: '4.3', difficulty: 'Medium', topic: 'vulnerability-management',
     q: 'Which scanning approach is most appropriate for a fragile legacy system that may crash under load?',
-    options: ['Aggressive unauthenticated scanning during peak hours', 'Credentialed, low-intensity scanning during an agreed window, or agent-based assessment', 'No assessment at all', 'Denial of service testing'],
+    options: [
+      "Aggressive unauthenticated scanning during the busiest production hours",
+      "Credentialed low-intensity scanning in an agreed window, or agent assessment",
+      "Excluding the system from assessment entirely to avoid any disruption",
+      "Denial of service testing to establish the failure threshold empirically",
+    ],
     answer: 1,
     explain: 'Agent-based or gentle credentialed assessment gathers the same information without the network stress that can destabilise fragile systems.' },
 
   { id: 'd4-80', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'digital-forensics',
     q: 'How does forensic evidence collection differ in cloud environments?',
-    options: ['It is impossible to collect any evidence', 'It relies on snapshots and provider audit logs rather than physical media seizure', 'Physical drives are always shipped to the customer', 'Only network captures are available'],
+    options: ['It is impossible to collect any evidence', 'It relies on snapshots and provider audit logs rather than physical media seizure', "Physical drives are always shipped to the customer for examination", 'Only network captures are available'],
     answer: 1,
     explain: 'You cannot seize a physical disk from a provider. Volume snapshots, memory captures and API audit trails become the primary evidence sources.' },
 
   { id: 'd4-81', domain: 4, objective: '4.4', difficulty: 'Hard', topic: 'soc-monitoring',
     q: 'Which approach most reliably reveals gaps in detection coverage across an environment?',
-    options: ['Counting deployed security products', 'Mapping existing detections to MITRE ATT&CK and validating each with controlled technique tests', 'Reviewing the security budget', 'Surveying analyst confidence'],
+    options: [
+      "Counting the number of security products deployed in the environment",
+      "Mapping detections to MITRE ATT&CK and validating each with controlled tests",
+      "Reviewing the annual security budget against industry benchmark spending",
+      "Surveying analyst confidence in the coverage of the current toolset",
+    ],
     answer: 1,
     explain: 'Mapping shows claimed coverage; controlled testing proves it. Together they turn assumed coverage into verified fact.' },
 
@@ -494,13 +634,18 @@ export const EXAM_D4: ExamQuestion[] = [
 
   { id: 'd4-83', domain: 4, objective: '4.7', difficulty: 'Medium', topic: 'automation-soar',
     q: 'Which benefit of automation is most relevant to consistency of outcome?',
-    options: ['Reduced electricity consumption', 'Every execution follows the same steps regardless of who is on shift', 'Smaller log files', 'Faster network speeds'],
+    options: [
+      "It measurably reduces the electricity consumed by the security stack",
+      "Every execution follows identical steps regardless of who is on shift",
+      "It produces smaller log files by removing redundant event records",
+      "It increases the throughput available on the monitored network links",
+    ],
     answer: 1,
     explain: 'Automated response removes shift-to-shift and analyst-to-analyst variation, which is often as valuable as the time saved.' },
 
   { id: 'd4-84', domain: 4, objective: '4.8', difficulty: 'Medium', topic: 'incident-response',
     q: 'Which action should occur immediately after confirming that credentials were stolen in a phishing incident?',
-    options: ['Wait for the next scheduled password rotation', 'Reset the credentials and revoke active sessions, tokens and application consents', 'Delete the phishing email only', 'Disable the SIEM alert that fired'],
+    options: ["Wait for the next scheduled password rotation cycle to take effect", 'Reset the credentials and revoke active sessions, tokens and application consents', 'Delete the phishing email only', 'Disable the SIEM alert that fired'],
     answer: 1,
     explain: 'A password reset alone leaves live sessions and OAuth grants intact. Revocation across all three is required to actually remove access.' },
 ]
