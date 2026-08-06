@@ -1,4 +1,5 @@
 import type { ExamQuestion } from '../../types'
+import { shuffleOptions } from '../../lib/shuffle'
 import { EXAM_D1 } from './d1'
 import { EXAM_D2 } from './d2'
 import { EXAM_D3 } from './d3'
@@ -72,7 +73,7 @@ function shuffle<T>(input: T[]): T[] {
  */
 export function buildExam(mode: ExamMode): ExamQuestion[] {
   if (mode.domain) {
-    return shuffle(EXAM_BANK.filter((q) => q.domain === mode.domain))
+    return shuffle(EXAM_BANK.filter((q) => q.domain === mode.domain)).map(shuffleOptions)
   }
   const picked: ExamQuestion[] = []
   for (const d of [1, 2, 3, 4, 5]) {
@@ -82,7 +83,7 @@ export function buildExam(mode: ExamMode): ExamQuestion[] {
   // rounding can leave the paper a question short or long
   const pool = shuffle(EXAM_BANK.filter((q) => !picked.includes(q)))
   while (picked.length < mode.count && pool.length) picked.push(pool.pop()!)
-  return shuffle(picked).slice(0, mode.count)
+  return shuffle(picked).slice(0, mode.count).map(shuffleOptions)
 }
 
 export const isCorrect = (q: ExamQuestion, given: number[]): boolean => {

@@ -16,6 +16,7 @@ import Resources from '../src/pages/Resources'
 import About from '../src/pages/About'
 import NotFound from '../src/pages/NotFound'
 import { TOPICS, DOMAINS, GLOSSARY, CHEATSHEETS, LABS, EXAM_BANK, EXAM_MODES, buildExam, isCorrect, domainModes } from '../src/data'
+import { shuffleOptions } from '../src/lib/shuffle'
 
 function render(path: string) {
   return renderToString(
@@ -160,6 +161,33 @@ for (const mode of [...EXAM_MODES, ...domainModes()]) {
     )
   }
 }
+// option shuffling must preserve which option text is correct, and must not
+// leave the correct answer clustered in one position (audit finding: 81% at B)
+console.log('Option shuffling')
+let shuffleMismatch = 0
+const shufflePos = [0, 0, 0, 0]
+let shuffleN = 0
+for (let round = 0; round < 30; round++) {
+  for (const paper of [buildExam(EXAM_MODES[0]), buildExam(EXAM_MODES[2])]) {
+    for (const q of paper) {
+      const orig = EXAM_BANK.find((o) => o.id === q.id)!
+      const shown = (Array.isArray(q.answer) ? q.answer : [q.answer]).map((i) => q.options[i]).sort().join('|')
+      const truth = (Array.isArray(orig.answer) ? orig.answer : [orig.answer]).map((i) => orig.options[i]).sort().join('|')
+      if (shown !== truth) shuffleMismatch++
+      if (!Array.isArray(q.answer)) {
+        shufflePos[q.answer]++
+        shuffleN++
+      }
+    }
+  }
+}
+check('shuffling preserves the correct option', shuffleMismatch === 0, `${shuffleMismatch} mismatches`)
+const expectedPos = shuffleN / 4
+const chi = shufflePos.reduce((acc, n) => acc + (n - expectedPos) ** 2 / expectedPos, 0)
+check('answer positions are uniform (chi-square < 12)', chi < 12, `chi-square ${chi.toFixed(2)}`)
+const roundTrip = shuffleOptions(EXAM_BANK[0])
+check('shuffleOptions keeps option count', roundTrip.options.length === EXAM_BANK[0].options.length)
+
 // grading logic
 const sample = EXAM_BANK.find((q) => Array.isArray(q.answer))!
 check('multi-select grades correctly', isCorrect(sample, [...(sample.answer as number[])]))

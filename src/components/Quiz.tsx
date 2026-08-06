@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CircleCheck, CircleX, RotateCcw, Trophy, Lightbulb } from 'lucide-react'
 import type { QuizQuestion } from '../types'
 import { useStore } from '../lib/store'
+import { shuffleOptions } from '../lib/shuffle'
 
-export default function Quiz({ questions, slug }: { questions: QuizQuestion[]; slug: string }) {
+export default function Quiz({ questions: source, slug }: { questions: QuizQuestion[]; slug: string }) {
   const { recordQuiz, quizScores } = useStore()
+  // options are shuffled per visit so answer position carries no information
+  const questions = useMemo(() => source.map(shuffleOptions), [source])
   const [index, setIndex] = useState(0)
   const [picked, setPicked] = useState<number | null>(null)
   const [score, setScore] = useState(0)
