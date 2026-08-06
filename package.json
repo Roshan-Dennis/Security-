@@ -12,9 +12,10 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "icons": "node scripts/gen-icons.mjs",
-    "test": "npm run typecheck && npm run test:render && npm run test:dom",
+    "test": "npm run typecheck && npm run test:render && npm run test:dom && npm run test:diagrams",
     "test:render": "esbuild scripts/smoke.tsx --bundle --platform=node --format=cjs --outfile=.smoke.cjs --jsx=automatic --loader:.css=empty --log-level=error && node .smoke.cjs && rm -f .smoke.cjs",
-    "test:dom": "node scripts/dom-smoke.mjs"
+    "test:dom": "node scripts/dom-smoke.mjs",
+    "test:diagrams": "node scripts/check-diagram-labels.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",

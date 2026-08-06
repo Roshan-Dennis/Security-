@@ -11,6 +11,8 @@ const COL_GAP = 88
 const ROW_GAP = 26
 const PAD_X = 18
 const PAD_Y = 34
+/** clearance required between an edge label and any node box */
+const LABEL_PAD = 8
 
 interface Placed extends DiagramNode {
   x: number
@@ -56,6 +58,8 @@ export default function Diagram({ spec }: { spec: DiagramSpec }) {
     }
   }, [spec])
 
+  const boxes = useMemo(() => [...byId.values()], [byId])
+
   const edges = useMemo(
     () =>
       spec.edges
@@ -69,10 +73,41 @@ export default function Diagram({ spec }: { spec: DiagramSpec }) {
           const tx = forward ? b.x : b.x + NODE_W / 2
           const ty = forward ? b.y + NODE_H / 2 : b.y
           const dx = Math.max(40, Math.abs(tx - sx) * 0.55)
-          const d = forward
-            ? `M ${sx} ${sy} C ${sx + dx} ${sy}, ${tx - dx} ${ty}, ${tx} ${ty}`
-            : `M ${sx} ${sy} C ${sx} ${sy + 60}, ${tx} ${ty + 60}, ${tx} ${ty}`
-          return { ...e, id: `${uid}-e${i}`, d, mid: { x: (sx + tx) / 2, y: (sy + ty) / 2 - 9 }, a, b }
+          const c1 = forward ? { x: sx + dx, y: sy } : { x: sx, y: sy + 60 }
+          const c2 = forward ? { x: tx - dx, y: ty } : { x: tx, y: ty + 60 }
+          const d = `M ${sx} ${sy} C ${c1.x} ${c1.y}, ${c2.x} ${c2.y}, ${tx} ${ty}`
+
+          // Place the label on the curve itself rather than at the arithmetic midpoint
+          // of the endpoints. The midpoint of a bezier between offset rows frequently
+          // lands inside the target node, which is how "match" ended up printed over
+          // the State Table subtitle. Walk a few positions along the curve and take the
+          // first that clears every node box.
+          const p0 = { x: sx, y: sy }
+          const p3 = { x: tx, y: ty }
+          const at = (t: number) => {
+            const u = 1 - t
+            return {
+              x: u * u * u * p0.x + 3 * u * u * t * c1.x + 3 * u * t * t * c2.x + t * t * t * p3.x,
+              y: u * u * u * p0.y + 3 * u * u * t * c1.y + 3 * u * t * t * c2.y + t * t * t * p3.y,
+            }
+          }
+          const clearsNodes = (pt: { x: number; y: number }) =>
+            !boxes.some(
+              (n) =>
+                pt.x > n.x - LABEL_PAD &&
+                pt.x < n.x + NODE_W + LABEL_PAD &&
+                pt.y > n.y - LABEL_PAD &&
+                pt.y < n.y + NODE_H + LABEL_PAD,
+            )
+          // try successive positions along the curve, and at each one a few vertical
+          // offsets, taking the first that clears every node box
+          const positions: Array<{ x: number; y: number }> = []
+          for (const t of [0.5, 0.4, 0.6, 0.3, 0.7, 0.25, 0.75]) {
+            const p = at(t)
+            for (const dy of [-9, -28, 20, -46, 38]) positions.push({ x: p.x, y: p.y + dy })
+          }
+          const mid = positions.find(clearsNodes) ?? { x: at(0.5).x, y: Math.min(a.y, b.y) - 14 }
+          return { ...e, id: `${uid}-e${i}`, d, mid, a, b }
         })
         .filter(Boolean) as Array<
         (typeof spec.edges)[number] & {
@@ -83,7 +118,7 @@ export default function Diagram({ spec }: { spec: DiagramSpec }) {
           b: Placed
         }
       >,
-    [spec.edges, byId, uid],
+    [spec.edges, byId, uid, boxes],
   )
 
   const dimmed = (id: string) => {
